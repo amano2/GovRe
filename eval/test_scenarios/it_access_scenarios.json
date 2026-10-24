@@ -1,0 +1,438 @@
+[
+  {
+    "id": "IT-001",
+    "domain": "it_access",
+    "category": "infrastructure",
+    "text": "DevOps engineer requesting temporary 3-hour Break-Glass production DB access linked to active Jira P1 incident ticket #INC-8921.",
+    "details": {
+      "is_break_glass": true,
+      "duration_hours": 3,
+      "has_incident_ticket": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "IT-SEC-001 \u00a72.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "gold_policy_passage": "Break-Glass Emergency Access: Temporary elevated production access must be requested via PAM portal with a linked incident/change ticket. Maximum grant duration is 4 hours."
+  },
+  {
+    "id": "IT-002",
+    "domain": "it_access",
+    "category": "infrastructure",
+    "text": "Developer requesting permanent standing read/write admin access to production PostgreSQL database.",
+    "details": {
+      "is_standing_access": true,
+      "is_break_glass": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a72.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "gold_policy_passage": "Zero Standing Access: Direct read/write access to production databases (SQL/NoSQL) and live cloud hosting infrastructure is prohibited for standard development roles."
+  },
+  {
+    "id": "IT-003",
+    "domain": "it_access",
+    "category": "infrastructure",
+    "text": "Site reliability engineer requesting 12-hour continuous break-glass production server access for an ongoing data migration.",
+    "details": {
+      "is_break_glass": true,
+      "duration_hours": 12,
+      "has_incident_ticket": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a72.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "gold_policy_passage": "Maximum grant duration is 4 hours, after which credentials automatically rotate and revoke."
+  },
+  {
+    "id": "IT-004",
+    "domain": "it_access",
+    "category": "infrastructure",
+    "text": "Engineer requesting break-glass access to production AWS environment without supplying a Jira ticket or incident reference.",
+    "details": {
+      "is_break_glass": true,
+      "duration_hours": 2,
+      "has_incident_ticket": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a72.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "gold_policy_passage": "Temporary elevated production access (Just-In-Time access) must be requested via PAM portal with a linked incident/change ticket (Jira / ServiceNow)."
+  },
+  {
+    "id": "IT-005",
+    "domain": "it_access",
+    "category": "infrastructure",
+    "text": "Marketing specialist requesting access to Workday HR Admin module with approval from Direct Manager, but missing System Owner sign-off.",
+    "details": {
+      "approvals_obtained": [
+        "manager"
+      ]
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "IT-SEC-001 \u00a72.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "gold_policy_passage": "Ad-hoc access to non-standard business applications requires ticketed justification, direct manager approval, and application system owner sign-off."
+  },
+  {
+    "id": "IT-006",
+    "domain": "it_access",
+    "category": "sod",
+    "text": "Release manager who holds production deployment authority requesting additional authority to approve their own pull requests and financial system releases.",
+    "details": {
+      "holds_both_deploy_and_approval": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a73.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_3",
+    "gold_policy_passage": "Dual Custody & Separation of Duties: No single individual may hold both software code deployment privileges and production release approval authority."
+  },
+  {
+    "id": "IT-007",
+    "domain": "it_access",
+    "category": "sod",
+    "text": "Lead backend developer requesting write and delete permissions in the production SIEM audit log cluster.",
+    "details": {
+      "requests_siem_delete_access": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a73.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_3",
+    "gold_policy_passage": "Developers may not possess direct write or delete permissions in production logging (SIEM), audit trail repositories, or security monitoring tools."
+  },
+  {
+    "id": "IT-008",
+    "domain": "it_access",
+    "category": "privileged_access",
+    "text": "Cloud architect configuring IAM root administrator access secured by FIDO2 WebAuthn Hardware Security Key (YubiKey).",
+    "details": {
+      "is_privileged_role": true,
+      "mfa_type": "fido2_hardware_key"
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "IT-SEC-001 \u00a73.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_3",
+    "gold_policy_passage": "Hardware security keys (FIDO2 / WebAuthn / YubiKey) or Phishing-Resistant Authenticator Apps are mandatory for all root, cluster admin, and IAM administrator accounts."
+  },
+  {
+    "id": "IT-009",
+    "domain": "it_access",
+    "category": "privileged_access",
+    "text": "System administrator requesting IAM root admin account protected solely by standard SMS-based text message OTP.",
+    "details": {
+      "is_privileged_role": true,
+      "mfa_type": "sms_otp"
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a73.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_3",
+    "gold_policy_passage": "SMS-based OTP is strictly prohibited as a standalone authentication factor for privileged access."
+  },
+  {
+    "id": "IT-0010",
+    "domain": "it_access",
+    "category": "auth",
+    "text": "Developer pushing application source code to company Git repository containing plaintext production database credentials and AWS secret keys.",
+    "details": {
+      "is_hardcoded_in_repo": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a74.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_4",
+    "gold_policy_passage": "Hardcoding API keys, database connection strings, SSH private keys, or cloud tokens into source code repositories (Git) is a critical security violation."
+  },
+  {
+    "id": "IT-011",
+    "domain": "it_access",
+    "category": "api_key_rotation",
+    "text": "Database administrator reviewing an internal service account API key active for 115 days without rotation.",
+    "details": {
+      "days_since_rotation": 115
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "IT-SEC-001 \u00a74.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_4",
+    "gold_policy_passage": "All machine credentials and API tokens must be stored in centralized Enterprise Vaults and rotated at least every 90 calendar days."
+  },
+  {
+    "id": "IT-012",
+    "domain": "it_access",
+    "category": "third_party_integration",
+    "text": "Product team integrating third-party AI analysis tool to query internal data warehouse, backed by CISO security review and signed DPA.",
+    "details": {
+      "is_third_party_integration": true,
+      "ciso_reviewed": true,
+      "signed_dpa": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "IT-SEC-001 \u00a74.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_4",
+    "gold_policy_passage": "Granting external SaaS vendors or third-party AI integrations read-only or read-write access to internal data warehouses requires Information Security architecture review and signed Data Processing Agreements (DPA)."
+  },
+  {
+    "id": "IT-013",
+    "domain": "it_access",
+    "category": "third_party_integration",
+    "text": "Growth team connecting external analytics SaaS to production customer data warehouse without CISO review or signed DPA.",
+    "details": {
+      "is_third_party_integration": true,
+      "ciso_reviewed": false,
+      "signed_dpa": false
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "IT-SEC-001 \u00a74.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_4",
+    "gold_policy_passage": "Granting external SaaS vendors or third-party AI integrations access to internal data warehouses requires Information Security (CISO team) architecture review and signed Data Processing Agreements (DPA)."
+  },
+  {
+    "id": "IT-014",
+    "domain": "it_access",
+    "category": "data_access",
+    "text": "Data scientist requesting read access to raw customer credit card and health records (Restricted PII) with signed Data Protection Officer (DPO) authorization.",
+    "details": {
+      "data_classification": "restricted",
+      "dpo_approved": true,
+      "is_encrypted": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "IT-SEC-001 \u00a75.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_5",
+    "gold_policy_passage": "Restricted / Highly Sensitive (PII / PHI / Payment Card Data): Customer credit card numbers, health records. Access requires explicit Data Protection Officer (DPO) authorization and must be encrypted."
+  },
+  {
+    "id": "IT-015",
+    "domain": "it_access",
+    "category": "data_access",
+    "text": "Intern requesting direct download access to unencrypted customer PII records without DPO approval.",
+    "details": {
+      "data_classification": "restricted",
+      "dpo_approved": false,
+      "is_encrypted": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a75.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_5",
+    "gold_policy_passage": "Access requires explicit Data Protection Officer (DPO) authorization and must be encrypted at rest and in transit."
+  },
+  {
+    "id": "IT-016",
+    "domain": "it_access",
+    "category": "data_export",
+    "text": "Employee copying confidential customer databases to an unencrypted personal USB flash drive to work from home.",
+    "details": {
+      "target_device_or_destination": "unencrypted_personal_usb"
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a75.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_5",
+    "gold_policy_passage": "Downloading customer PII or confidential enterprise databases to unencrypted USB drives, personal devices, or unauthorized external cloud storage is strictly prohibited."
+  },
+  {
+    "id": "IT-017",
+    "domain": "it_access",
+    "category": "data_access",
+    "text": "Active full-time employee requesting read access to internal engineering wiki and public product roadmaps (Internal/Public classification).",
+    "details": {
+      "data_classification": "internal",
+      "dpo_approved": false,
+      "is_encrypted": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "IT-SEC-001 \u00a75.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_5",
+    "gold_policy_passage": "Internal / Confidential: Internal memos, source code, financial projections (Restricted to active employees)."
+  },
+  {
+    "id": "IT-018",
+    "domain": "it_access",
+    "category": "infrastructure",
+    "text": "Engineer requesting access to Snowflake reporting database with approval from Direct Manager and Snowflake System Owner.",
+    "details": {
+      "approvals_obtained": [
+        "manager",
+        "app_owner"
+      ]
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "IT-SEC-001 \u00a72.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "gold_policy_passage": "Ad-hoc access to non-standard business applications requires ticketed justification, direct manager approval, and application system owner sign-off."
+  },
+  {
+    "id": "ITA-019",
+    "domain": "it_access",
+    "category": "storage",
+    "text": "Employee downloading customer PII to an unencrypted USB drive.",
+    "details": {
+      "data_classification": "pii",
+      "target_device_or_destination": "usb drive"
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a75.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_5",
+    "gold_policy_passage": "Downloading customer PII or enterprise data to unencrypted USB drives or personal devices is strictly prohibited."
+  },
+  {
+    "id": "ITA-020",
+    "domain": "it_access",
+    "category": "data_access",
+    "text": "Accessing Restricted PII data without DPO authorization.",
+    "details": {
+      "data_classification": "restricted",
+      "dpo_approved": false,
+      "is_encrypted": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a75.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_5",
+    "gold_policy_passage": "Access to Restricted / Highly Sensitive PII/PHI data requires explicit Data Protection Officer (DPO) authorization."
+  },
+  {
+    "id": "ITA-021",
+    "domain": "it_access",
+    "category": "infrastructure",
+    "text": "Requesting standing direct write access to a production database.",
+    "details": {
+      "is_standing_access": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a72.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "gold_policy_passage": "Direct permanent / standing read-write access to production environments is strictly prohibited."
+  },
+  {
+    "id": "ITA-022",
+    "domain": "it_access",
+    "category": "infrastructure",
+    "text": "Requesting break-glass access for 5 hours.",
+    "details": {
+      "is_break_glass": true,
+      "has_incident_ticket": true,
+      "duration_hours": 5
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a72.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "gold_policy_passage": "Break-glass access duration (5 hours) exceeds maximum allowed grant of 4 hours."
+  },
+  {
+    "id": "ITA-023",
+    "domain": "it_access",
+    "category": "sod",
+    "text": "Developer requesting both deploy and release approval authority.",
+    "details": {
+      "holds_both_deploy_and_approval": true,
+      "requests_siem_delete_access": false,
+      "mfa_type": "fido2",
+      "is_privileged_role": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a73.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_3",
+    "gold_policy_passage": "Separation of Duties violation: no single individual may hold both code deployment and production release approval authority."
+  },
+  {
+    "id": "ITA-024",
+    "domain": "it_access",
+    "category": "sod",
+    "text": "Privileged IAM administrator account using SMS OTP for MFA.",
+    "details": {
+      "is_privileged_role": true,
+      "mfa_type": "sms otp",
+      "holds_both_deploy_and_approval": false,
+      "requests_siem_delete_access": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a73.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_3",
+    "gold_policy_passage": "Privileged/IAM administrator accounts require FIDO2/Hardware Keys or Phishing-Resistant MFA; SMS OTP is prohibited."
+  },
+  {
+    "id": "ITA-025",
+    "domain": "it_access",
+    "category": "api_key_rotation",
+    "text": "API key rotation overdue at 95 days.",
+    "details": {
+      "days_since_rotation": 95
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "IT-SEC-001 \u00a74.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_4",
+    "gold_policy_passage": "API secret has not been rotated in 95 days (mandatory rotation SLA is 90 calendar days)."
+  },
+  {
+    "id": "ITA-026",
+    "domain": "it_access",
+    "category": "third_party_integration",
+    "text": "Third-party SaaS integration without signed DPA.",
+    "details": {
+      "is_third_party_integration": true,
+      "ciso_reviewed": true,
+      "signed_dpa": false
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "IT-SEC-001 \u00a74.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_4",
+    "gold_policy_passage": "Third-party SaaS/AI data warehouse integration requires CISO architecture review and signed Data Processing Agreement (DPA)."
+  },
+  {
+    "id": "ITA-027",
+    "domain": "it_access",
+    "category": "data_access",
+    "text": "Accessing Restricted PII data without encryption.",
+    "details": {
+      "data_classification": "restricted",
+      "dpo_approved": true,
+      "is_encrypted": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a75.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_5",
+    "gold_policy_passage": "Restricted data access must be encrypted at rest and in transit."
+  },
+  {
+    "id": "ITA-028",
+    "domain": "it_access",
+    "category": "infrastructure",
+    "text": "Break-glass production access without an incident ticket.",
+    "details": {
+      "is_break_glass": true,
+      "has_incident_ticket": false,
+      "duration_hours": 2
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a72.2",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "gold_policy_passage": "Break-glass emergency production access requires a linked incident or change ticket."
+  },
+  {
+    "id": "ITA-029",
+    "domain": "it_access",
+    "category": "sod",
+    "text": "Developer requesting delete access to SIEM logs.",
+    "details": {
+      "requests_siem_delete_access": true,
+      "holds_both_deploy_and_approval": false,
+      "mfa_type": "fido2",
+      "is_privileged_role": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "IT-SEC-001 \u00a73.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_3",
+    "gold_policy_passage": "Developers are prohibited from possessing write/delete permissions in production audit or SIEM logging repositories."
+  },
+  {
+    "id": "ITA-030",
+    "domain": "it_access",
+    "category": "infrastructure",
+    "text": "Non-standard application access missing system owner sign-off.",
+    "details": {
+      "approvals_obtained": [
+        "manager"
+      ]
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "IT-SEC-001 \u00a72.1",
+    "gold_chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "gold_policy_passage": "Non-standard application access requires both direct manager approval and application system owner sign-off."
+  }
+]

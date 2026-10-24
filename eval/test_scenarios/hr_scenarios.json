@@ -1,0 +1,467 @@
+[
+  {
+    "id": "HR-001",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Senior engineer requesting 5 consecutive days of annual paid time off (PTO) planned for next month, submitted 21 days in advance.",
+    "details": {
+      "leave_type": "annual_pto",
+      "days_requested": 5,
+      "notice_days": 21
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "HR-POL-001 \u00a72.1",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "All full-time employees accrue 20 days of Annual Leave per calendar year. Planned leaves exceeding 3 consecutive business days require at least 2 weeks prior notice."
+  },
+  {
+    "id": "HR-002",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee requesting 25 days of annual leave in a single calendar year without prior accrued balance rollover.",
+    "details": {
+      "leave_type": "annual_pto",
+      "days_requested": 25,
+      "notice_days": 30
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-001 \u00a72.1",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "All full-time employees accrue 20 days of Annual Leave per calendar year."
+  },
+  {
+    "id": "HR-003",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee submitting planned 4-day annual leave starting in 3 days without prior notice or manager pre-approval.",
+    "details": {
+      "leave_type": "annual_pto",
+      "days_requested": 4,
+      "notice_days": 3
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "HR-POL-001 \u00a72.1",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "Planned leaves exceeding 3 consecutive business days require at least 2 weeks prior notice and manager approval via the HR Portal."
+  },
+  {
+    "id": "HR-004",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee taking 2 days of sick leave due to seasonal flu, notified manager via email at 9:00 AM on the day of absence.",
+    "details": {
+      "leave_type": "sick_leave",
+      "days_requested": 2,
+      "medical_certificate_provided": null
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "HR-POL-001 \u00a72.2",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "Employees are granted 10 days of paid Sick Leave annually. In case of emergency or sudden illness, the employee must notify their direct reporting manager by 9:30 AM."
+  },
+  {
+    "id": "HR-005",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee taking 4 consecutive business days of sick leave but stating they did not visit a doctor and will not provide a medical certificate.",
+    "details": {
+      "leave_type": "sick_leave",
+      "days_requested": 4,
+      "medical_certificate_provided": false
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "HR-POL-001 \u00a72.2",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "For any consecutive medical absence lasting 3 or more business days, an official medical certificate from a licensed healthcare practitioner must be uploaded to the HR portal."
+  },
+  {
+    "id": "HR-006",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee requesting 14 days of paid sick leave in a single year, having already exhausted 8 days previously.",
+    "details": {
+      "leave_type": "sick_leave",
+      "days_requested": 14,
+      "medical_certificate_provided": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-001 \u00a72.2",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "Employees are granted 10 days of paid Sick Leave annually, credited on January 1 of each calendar year."
+  },
+  {
+    "id": "HR-007",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Full-time female employee with 200 days of service in the past 12 months applying for 26 weeks of paid maternity leave.",
+    "details": {
+      "leave_type": "maternity",
+      "days_requested": 182,
+      "service_days_in_past_year": 200
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "HR-POL-001 \u00a72.3",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "Eligible female employees are entitled to 26 weeks (182 calendar days) of fully paid maternity leave for up to two surviving children. A minimum of 80 days of service is required."
+  },
+  {
+    "id": "HR-008",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee with only 30 days of service requesting 26 weeks of paid maternity leave.",
+    "details": {
+      "leave_type": "maternity",
+      "days_requested": 182,
+      "service_days_in_past_year": 30
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-001 \u00a72.3",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "A minimum of 80 days of service in the preceding 12 months is required."
+  },
+  {
+    "id": "HR-009",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee requesting 4 days of bereavement leave following the demise of their mother (immediate family member).",
+    "details": {
+      "leave_type": "bereavement",
+      "days_requested": 4,
+      "bereavement_relation": "mother"
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "HR-POL-001 \u00a72.4",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "Employees may avail up to 5 consecutive business days of paid bereavement leave in the event of the demise of an immediate family member (spouse, child, parent, sibling, or parent-in-law)."
+  },
+  {
+    "id": "HR-010",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee requesting 4 days of paid bereavement leave for an extended family member (uncle).",
+    "details": {
+      "leave_type": "bereavement",
+      "days_requested": 4,
+      "bereavement_relation": "uncle"
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-001 \u00a72.4",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "Up to 2 consecutive business days of paid leave are granted for extended family members (grandparents, aunts, uncles)."
+  },
+  {
+    "id": "HR-011",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee claiming a compensatory off day for working on a critical weekend project 75 days ago without using it within the standard period.",
+    "details": {
+      "leave_type": "comp_off",
+      "days_requested": 1,
+      "manager_preapproved": true,
+      "comp_off_days_since_worked": 75
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-001 \u00a72.5",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "Comp-off must be utilized within 60 calendar days from the date worked; otherwise, it expires."
+  },
+  {
+    "id": "HR-012",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Remote employee submitting monthly home high-speed broadband claim of $45 USD with attached itemized service invoice.",
+    "details": {
+      "expense_type": "broadband",
+      "amount_usd": 45.0,
+      "days_since_expense": 10,
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "HR-POL-002 \u00a72.1",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_2",
+    "gold_policy_passage": "Employees working under a hybrid or remote contract are entitled to claim up to $50 USD per month for high-speed home broadband expenses with itemized billing statement."
+  },
+  {
+    "id": "HR-013",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Employee claiming $85 USD for monthly home internet allowance without special exception.",
+    "details": {
+      "expense_type": "broadband",
+      "amount_usd": 85.0,
+      "days_since_expense": 12,
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-002 \u00a72.1",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_2",
+    "gold_policy_passage": "Employees working under a hybrid or remote contract are entitled to claim up to $50 USD per month (or local currency equivalent) for high-speed home broadband expenses."
+  },
+  {
+    "id": "HR-014",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Employee with 40 days tenure claiming $280 USD for an ergonomic office chair with attached itemized store receipt.",
+    "details": {
+      "expense_type": "ergonomic_setup",
+      "amount_usd": 280.0,
+      "tenure_days": 40,
+      "days_since_expense": 15,
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "HR-POL-002 \u00a72.2",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_2",
+    "gold_policy_passage": "Full-time employees are eligible for a one-time $300 USD stipend upon hire to purchase approved ergonomic furniture. Claims must be filed within the first 90 days."
+  },
+  {
+    "id": "HR-015",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Employee submitting an expense claim incurred 70 calendar days ago along with valid original receipts.",
+    "details": {
+      "expense_type": "travel_per_diem",
+      "amount_usd": 60.0,
+      "days_since_expense": 70,
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-002 \u00a75.1",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_5",
+    "gold_policy_passage": "All expense claims must be filed within 30 calendar days of incurring the expense. Claims older than 60 days will be rejected automatically."
+  },
+  {
+    "id": "HR-016",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Employee claiming $40 USD for business travel meals without providing an original receipt.",
+    "details": {
+      "expense_type": "meal",
+      "amount_usd": 40.0,
+      "city_tier": 2,
+      "days_since_expense": 10,
+      "has_itemized_receipt": false
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "HR-POL-002 \u00a75.2",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_5",
+    "gold_policy_passage": "Original digital or scanned receipts are mandatory for all individual transactions exceeding $15 USD."
+  },
+  {
+    "id": "HR-017",
+    "domain": "hr",
+    "category": "ethics",
+    "text": "Full-time software engineer accepting paid weekend contracting work for a commercial fintech startup.",
+    "details": {
+      "is_commercial_employment": true,
+      "vp_and_hr_approved": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-004 \u00a72.1",
+    "gold_chunk_id": "hr_code_of_conduct_chunk_2",
+    "gold_policy_passage": "Full-time employees are strictly prohibited from engaging in commercial secondary employment, consulting contracts, or board advisories."
+  },
+  {
+    "id": "HR-018",
+    "domain": "hr",
+    "category": "ethics",
+    "text": "Senior manager invited to deliver an unpaid academic guest lecture at a university with written disclosure submitted to Department VP and HR.",
+    "details": {
+      "is_volunteer_or_academic": true,
+      "vp_and_hr_approved": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "HR-POL-004 \u00a72.1",
+    "gold_chunk_id": "hr_code_of_conduct_chunk_2",
+    "gold_policy_passage": "Non-commercial, non-profit volunteer work or academic guest lectures are permissible provided written prior disclosure is approved by the Department Vice President and HR."
+  },
+  {
+    "id": "HR-019",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee requesting 12 days of annual leave without prior notice.",
+    "details": {
+      "leave_type": "annual_pto",
+      "days_requested": 12,
+      "notice_days": 1
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "HR-POL-001 \u00a72.1",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "Planned leaves exceeding 3 consecutive business days require at least 2 weeks prior notice."
+  },
+  {
+    "id": "HR-020",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee taking 3 consecutive business days of sick leave with a medical certificate.",
+    "details": {
+      "leave_type": "sick_leave",
+      "days_requested": 3,
+      "medical_certificate_provided": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "HR-POL-001 \u00a72.2",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "For any consecutive medical absence lasting 3 or more business days, an official medical certificate must be uploaded."
+  },
+  {
+    "id": "HR-021",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee requesting 21 days of paternity leave.",
+    "details": {
+      "leave_type": "paternity",
+      "days_requested": 21,
+      "months_since_birth": 2
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-001 \u00a72.3",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "Paternity leave requested exceeds 4-week (20 working days) limit."
+  },
+  {
+    "id": "HR-022",
+    "domain": "hr",
+    "category": "leave",
+    "text": "Employee claiming comp-off for working 50 days ago without prior manager approval.",
+    "details": {
+      "leave_type": "comp_off",
+      "days_requested": 1,
+      "manager_preapproved": false,
+      "comp_off_days_since_worked": 50
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-001 \u00a72.5",
+    "gold_chunk_id": "hr_leave_policy_chunk_2",
+    "gold_policy_passage": "Comp-off claims require prior manager pre-approval before working on holiday or weekend."
+  },
+  {
+    "id": "HR-023",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Employee claiming $40 USD for home broadband without itemized billing.",
+    "details": {
+      "expense_type": "broadband",
+      "amount_usd": 40.0,
+      "days_since_expense": 10,
+      "has_itemized_receipt": false
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "HR-POL-002 \u00a72.1",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_2",
+    "gold_policy_passage": "Employees working under a hybrid or remote contract are entitled to claim up to $50 USD per month for high-speed home broadband expenses with itemized billing statement."
+  },
+  {
+    "id": "HR-024",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Employee with 100 days tenure claiming $150 USD for an ergonomic chair.",
+    "details": {
+      "expense_type": "ergonomic_setup",
+      "amount_usd": 150.0,
+      "tenure_days": 100,
+      "days_since_expense": 10,
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-002 \u00a72.2",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_2",
+    "gold_policy_passage": "Claims must be filed within the first 90 days."
+  },
+  {
+    "id": "HR-025",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Employee claiming $20 USD for business travel meals without providing an original receipt.",
+    "details": {
+      "expense_type": "meal",
+      "amount_usd": 20.0,
+      "city_tier": 2,
+      "days_since_expense": 5,
+      "has_itemized_receipt": false
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "HR-POL-002 \u00a75.2",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_5",
+    "gold_policy_passage": "Original digital or scanned receipts are mandatory for all individual transactions exceeding $15 USD."
+  },
+  {
+    "id": "HR-026",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Employee booking 5 hour flight in business class.",
+    "details": {
+      "expense_type": "flight",
+      "flight_duration_hours": 5,
+      "travel_class": "business",
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-002 \u00a73.1",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_3",
+    "gold_policy_passage": "Flights under 6 hours require mandatory Economy class."
+  },
+  {
+    "id": "HR-027",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Employee submitting expense claim after 45 days.",
+    "details": {
+      "expense_type": "travel_per_diem",
+      "amount_usd": 40.0,
+      "days_since_expense": 45,
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "HR-POL-002 \u00a75.1",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_5",
+    "gold_policy_passage": "All expense claims must be filed within 30 calendar days of incurring the expense."
+  },
+  {
+    "id": "HR-028",
+    "domain": "hr",
+    "category": "ethics",
+    "text": "Employee accepting a $40 gift from a vendor without disclosing it to the Compliance Team.",
+    "details": {
+      "gift_value_usd": 40,
+      "is_cash_or_gift_card": false,
+      "disclosed_to_compliance": false
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "HR-POL-004 \u00a71.1",
+    "gold_chunk_id": "hr_code_of_conduct_chunk_2",
+    "gold_policy_passage": "Activity complies with professional integrity and ethics guidelines."
+  },
+  {
+    "id": "HR-029",
+    "domain": "hr",
+    "category": "ethics",
+    "text": "Employee receiving a $10 Amazon gift card from a client.",
+    "details": {
+      "gift_value_usd": 10,
+      "is_cash_or_gift_card": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-004 \u00a72.2",
+    "gold_chunk_id": "hr_code_of_conduct_chunk_2",
+    "gold_policy_passage": "Cash or cash equivalents (gift cards, prepaid debit cards) of any amount are strictly prohibited."
+  },
+  {
+    "id": "HR-030",
+    "domain": "hr",
+    "category": "reimbursement",
+    "text": "Employee submitting a meal claim of $60 USD in a Tier 2 city.",
+    "details": {
+      "expense_type": "meal",
+      "amount_usd": 60.0,
+      "city_tier": 2,
+      "days_since_expense": 5,
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "HR-POL-002 \u00a73.2",
+    "gold_chunk_id": "hr_reimbursement_policy_chunk_3",
+    "gold_policy_passage": "Daily meal expense exceeds Tier 2 per diem limit of $50 USD per day."
+  }
+]

@@ -1,0 +1,40 @@
+# Environment & Sensitive Credentials
+.env*
+*.env
+*.key
+*.pem
+*.secret
+*token*
+*credential*
+
+# Python build & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Markdown Policy & Documentation files
+# (Enforced: None of the .md files except README.md get uploaded)
+*.md
+**/*.md
+!/README.md
+!README.md
+walkthrough*
+GEMINI*
+
+# Operating System & IDE artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+*.sublime-*

@@ -1,0 +1,494 @@
+[
+  {
+    "id": "FIN-001",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Team lead purchasing $750 USD in cloud testing credits (Tier 1) with written approval from Direct Manager.",
+    "details": {
+      "contract_amount_usd": 750.0,
+      "approvals_obtained": [
+        "manager"
+      ],
+      "vendor_quotes_count": 1
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "FIN-POL-001 \u00a72.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "gold_policy_passage": "Tier 1 (Up to $1,000 USD): Requires Direct Manager approval."
+  },
+  {
+    "id": "FIN-002",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Engineering manager purchasing $6,000 USD dev tooling license (Tier 2) with approvals from Direct Manager and Department Director.",
+    "details": {
+      "contract_amount_usd": 6000.0,
+      "approvals_obtained": [
+        "manager",
+        "director"
+      ],
+      "vendor_quotes_count": 1
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "FIN-POL-001 \u00a72.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "gold_policy_passage": "Tier 2 ($1,001 to $10,000 USD): Requires Direct Manager and Department Head (Director) approval."
+  },
+  {
+    "id": "FIN-003",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Project manager initiating a $7,500 USD software procurement with only Direct Manager sign-off, missing Department Director approval.",
+    "details": {
+      "contract_amount_usd": 7500.0,
+      "approvals_obtained": [
+        "manager"
+      ],
+      "vendor_quotes_count": 1
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "FIN-POL-001 \u00a72.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "gold_policy_passage": "Tier 2 ($1,001 to $10,000 USD): Requires Direct Manager and Department Head (Director) approval."
+  },
+  {
+    "id": "FIN-004",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Department purchasing enterprise infrastructure worth $65,000 USD with CFO and CEO signatures and 3 competitive vendor bids.",
+    "details": {
+      "contract_amount_usd": 65000.0,
+      "approvals_obtained": [
+        "cfo",
+        "ceo"
+      ],
+      "vendor_quotes_count": 3
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "FIN-POL-001 \u00a72.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "gold_policy_passage": "Tier 4 (Over $50,000 USD): Requires Chief Financial Officer (CFO) and Chief Executive Officer (CEO) sign-off, alongside competitive bidding documentation (minimum 3 vendor quotes)."
+  },
+  {
+    "id": "FIN-005",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Manager attempting to purchase $70,000 enterprise software contract without obtaining 3 vendor quotes (only 1 quote provided).",
+    "details": {
+      "contract_amount_usd": 70000.0,
+      "approvals_obtained": [
+        "cfo",
+        "ceo"
+      ],
+      "vendor_quotes_count": 1
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "FIN-POL-001 \u00a72.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "gold_policy_passage": "Tier 4 (Over $50,000 USD): Requires Chief Financial Officer (CFO) and Chief Executive Officer (CEO) sign-off, alongside competitive bidding documentation (minimum 3 vendor quotes)."
+  },
+  {
+    "id": "FIN-006",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Procurement officer deliberately splitting a single $18,000 vendor contract into two $9,000 purchase orders to avoid Tier 3 Controller sign-off.",
+    "details": {
+      "is_split_invoice": true,
+      "contract_amount_usd": 18000.0
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a72.2",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "gold_policy_passage": "Intentionally splitting a single procurement order, software license batch, or service invoice into multiple smaller invoices to circumvent approval limits is strictly prohibited."
+  },
+  {
+    "id": "FIN-007",
+    "domain": "finance",
+    "category": "pcard",
+    "text": "Employee using corporate P-Card to purchase monthly AWS cloud hosting charges ($120 USD) with itemized receipt submitted in 3 days.",
+    "details": {
+      "expense_type": "saas_subscription",
+      "amount_usd": 120.0,
+      "days_since_transaction": 3,
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "FIN-POL-001 \u00a73.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_3",
+    "gold_policy_passage": "Corporate P-Cards are issued solely for legitimate, pre-approved business operations, SaaS subscription renewals, emergency field supplies, and authorized business travel."
+  },
+  {
+    "id": "FIN-008",
+    "domain": "finance",
+    "category": "pcard",
+    "text": "Employee using corporate P-Card to buy personal cryptocurrency and luxury resort tickets.",
+    "details": {
+      "expense_type": "cryptocurrency_and_luxury",
+      "amount_usd": 850.0,
+      "is_personal_expense": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a73.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_3",
+    "gold_policy_passage": "P-Cards must never be used for personal expenses, personal cash advances, gambling, cryptocurrency transactions, or luxury/spa services."
+  },
+  {
+    "id": "FIN-009",
+    "domain": "finance",
+    "category": "pcard",
+    "text": "Employee with unreconciled P-Card transaction of $200 USD remaining unsubmitted for 38 calendar days.",
+    "details": {
+      "expense_type": "field_supplies",
+      "amount_usd": 200.0,
+      "days_since_transaction": 38,
+      "has_itemized_receipt": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a73.2",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_3",
+    "gold_policy_passage": "If an employee fails to submit receipts within 30 calendar days, the card will be suspended, and non-reconciled balances may be deducted from payroll."
+  },
+  {
+    "id": "FIN-010",
+    "domain": "finance",
+    "category": "pcard",
+    "text": "Employee submitting P-Card charge of $55 USD on day 4 without attaching an itemized tax receipt.",
+    "details": {
+      "expense_type": "travel_supplies",
+      "amount_usd": 55.0,
+      "days_since_transaction": 4,
+      "has_itemized_receipt": false
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "FIN-POL-001 \u00a73.2",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_3",
+    "gold_policy_passage": "Transactions exceeding $25 USD require an itemized digital tax invoice."
+  },
+  {
+    "id": "FIN-011",
+    "domain": "finance",
+    "category": "vendor_onboarding",
+    "text": "Accounts payable issuing $20,000 initial payment to a new offshore vendor who has completed KYV tax verification and sanctions screening.",
+    "details": {
+      "contract_amount_usd": 20000.0,
+      "kyv_sanctions_completed": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "FIN-POL-001 \u00a74.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_4",
+    "gold_policy_passage": "All new commercial vendors, contractors, and service providers must complete vendor risk assessment (KYV), tax registration verification, and sanctions screening prior to initial invoice payment."
+  },
+  {
+    "id": "FIN-012",
+    "domain": "finance",
+    "category": "vendor_onboarding",
+    "text": "Project lead requesting immediate wire transfer of $15,000 to a newly created consulting firm without completing KYV or sanctions clearance.",
+    "details": {
+      "contract_amount_usd": 15000.0,
+      "kyv_sanctions_completed": false,
+      "legal_head_approved": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a74.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_4",
+    "gold_policy_passage": "All new commercial vendors, contractors, and service providers must complete vendor risk assessment (KYV), tax registration verification, and sanctions screening prior to contract execution or initial invoice payment."
+  },
+  {
+    "id": "FIN-013",
+    "domain": "finance",
+    "category": "advance_payment",
+    "text": "Vendor demanding a 60% upfront advance payment ($30,000 USD) on a custom consulting engagement without providing a performance bank guarantee.",
+    "details": {
+      "advance_payment_percentage": 60,
+      "contract_amount_usd": 50000.0,
+      "has_bank_guarantee": false,
+      "is_standard_cots_saas": false
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a74.2",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_4",
+    "gold_policy_passage": "Advance payments to suppliers exceeding 30% of total contract value are prohibited unless backed by a performance bank guarantee or approved by the Finance Controller."
+  },
+  {
+    "id": "FIN-014",
+    "domain": "finance",
+    "category": "client_dinner",
+    "text": "Account executive hosting prospective client dinner for 4 attendees at $85 USD per attendee ($340 total) with attendee names and business agenda attached.",
+    "details": {
+      "is_client_event": true,
+      "cost_per_person_usd": 85.0,
+      "total_event_cost_usd": 340.0,
+      "attendees_listed": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "FIN-POL-001 \u00a75.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_5",
+    "gold_policy_passage": "Business meals hosted for prospective or active clients are reimbursable up to $100 USD per attendee. Itemized dining receipts must list the names, affiliations, and business purpose."
+  },
+  {
+    "id": "FIN-015",
+    "domain": "finance",
+    "category": "client_dinner",
+    "text": "Sales director claiming $160 USD per attendee for a lavish 2-person dinner with prospective clients.",
+    "details": {
+      "is_client_event": true,
+      "cost_per_person_usd": 160.0,
+      "total_event_cost_usd": 320.0,
+      "attendees_listed": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a75.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_5",
+    "gold_policy_passage": "Business meals hosted for prospective or active clients are reimbursable up to $100 USD per attendee (including taxes and gratuity)."
+  },
+  {
+    "id": "FIN-016",
+    "domain": "finance",
+    "category": "client_dinner",
+    "text": "Client appreciation banquet totaling $1,400 USD submitted without prior written Department VP authorization.",
+    "details": {
+      "is_client_event": true,
+      "cost_per_person_usd": 70.0,
+      "total_event_cost_usd": 1400.0,
+      "attendees_listed": true,
+      "vp_preapproved": false
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "FIN-POL-001 \u00a75.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_5",
+    "gold_policy_passage": "Total entertainment spend exceeding $1,000 USD for a single event requires advance written authorization from the Department Vice President."
+  },
+  {
+    "id": "FIN-017",
+    "domain": "finance",
+    "category": "team_event",
+    "text": "Engineering team hosting quarterly celebration for 10 members at $35 USD per person ($350 total) with manager approval.",
+    "details": {
+      "is_client_event": false,
+      "cost_per_person_usd": 35.0,
+      "total_event_cost_usd": 350.0,
+      "manager_approved": true
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "FIN-POL-001 \u00a75.2",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_5",
+    "gold_policy_passage": "Quarterly departmental team dinners or morale events are budgeted at a ceiling of $40 USD per employee."
+  },
+  {
+    "id": "FIN-018",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Employee buying a $2,200 MacBook Pro directly on personal credit card and submitting an expense reimbursement claim.",
+    "details": {
+      "amount_usd": 2200.0,
+      "is_it_hardware": true,
+      "purchased_via_reimbursement": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a76.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_6",
+    "gold_policy_passage": "All laptops, monitors, servers, and telecommunication hardware must be procured exclusively via Centralized IT Procurement. Individual employee purchases of computing devices via expense reimbursement are strictly prohibited."
+  },
+  {
+    "id": "FIN-019",
+    "domain": "finance",
+    "category": "pcard",
+    "text": "Employee used corporate P-Card to buy cryptocurrency.",
+    "details": {
+      "expense_type": "cryptocurrency",
+      "amount_usd": 100.0,
+      "days_since_transaction": 5,
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a73.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_3",
+    "gold_policy_passage": "Corporate P-Cards must never be used for personal expenses, cash advances, cryptocurrency, gambling, or luxury services."
+  },
+  {
+    "id": "FIN-020",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Team lead purchasing a $1,500 USD software license without Director approval.",
+    "details": {
+      "contract_amount_usd": 1500.0,
+      "approvals_obtained": [
+        "manager"
+      ],
+      "vendor_quotes_count": 1
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "FIN-POL-001 \u00a72.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "gold_policy_passage": "Tier 2 purchase ($1,500.0) requires approvals from both Direct Manager and Department Head (Director)."
+  },
+  {
+    "id": "FIN-021",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Employee purchasing a laptop via reimbursement.",
+    "details": {
+      "amount_usd": 2000.0,
+      "is_it_hardware": true,
+      "purchased_via_reimbursement": true,
+      "approvals_obtained": [
+        "manager"
+      ]
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a76.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_6",
+    "gold_policy_passage": "Hardware and computing devices must be procured exclusively via Centralized IT Procurement, not employee reimbursement."
+  },
+  {
+    "id": "FIN-022",
+    "domain": "finance",
+    "category": "vendor_onboarding",
+    "text": "Vendor onboarding with a 40% advance payment and no bank guarantee.",
+    "details": {
+      "kyv_sanctions_completed": true,
+      "advance_payment_percentage": 40,
+      "has_bank_guarantee": false,
+      "is_standard_cots_saas": false,
+      "contract_amount_usd": 10000
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a74.2",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_4",
+    "gold_policy_passage": "Advance supplier payments exceeding 30% are prohibited without a performance bank guarantee."
+  },
+  {
+    "id": "FIN-023",
+    "domain": "finance",
+    "category": "entertainment",
+    "text": "Client dinner costing $120 USD per person.",
+    "details": {
+      "is_client_event": true,
+      "cost_per_person_usd": 120.0,
+      "total_event_cost_usd": 480.0,
+      "attendees_listed": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a75.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_5",
+    "gold_policy_passage": "Client dining expense exceeds the maximum limit of $100 USD per attendee."
+  },
+  {
+    "id": "FIN-024",
+    "domain": "finance",
+    "category": "pcard",
+    "text": "P-Card reconciliation overdue by 35 days.",
+    "details": {
+      "expense_type": "software",
+      "amount_usd": 50.0,
+      "days_since_transaction": 35,
+      "has_itemized_receipt": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a73.2",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_3",
+    "gold_policy_passage": "P-Card reconciliation overdue (35 days); unreconciled balances beyond 30 days trigger card suspension and payroll deduction."
+  },
+  {
+    "id": "FIN-025",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Procurement of $60,000 USD software with only 2 vendor quotes.",
+    "details": {
+      "contract_amount_usd": 60000.0,
+      "approvals_obtained": [
+        "cfo",
+        "ceo",
+        "director",
+        "manager"
+      ],
+      "vendor_quotes_count": 2
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "FIN-POL-001 \u00a72.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "gold_policy_passage": "Procurements exceeding $50,000 require minimum 3 competitive vendor quotes."
+  },
+  {
+    "id": "FIN-026",
+    "domain": "finance",
+    "category": "entertainment",
+    "text": "Team dinner costing $50 USD per person.",
+    "details": {
+      "is_client_event": false,
+      "cost_per_person_usd": 50.0,
+      "total_event_cost_usd": 400.0,
+      "manager_approved": true
+    },
+    "gold_decision": "BLOCK",
+    "gold_rule_id": "FIN-POL-001 \u00a75.2",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_5",
+    "gold_policy_passage": "Internal team dinner cost exceeds the $40 USD per employee ceiling."
+  },
+  {
+    "id": "FIN-027",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Tier 3 purchase of $20,000 without Finance Controller approval.",
+    "details": {
+      "contract_amount_usd": 20000.0,
+      "approvals_obtained": [
+        "director",
+        "procurement"
+      ],
+      "vendor_quotes_count": 1
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "FIN-POL-001 \u00a72.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "gold_policy_passage": "Tier 3 purchase requires approvals from Department Head, Procurement Lead, and Finance Controller."
+  },
+  {
+    "id": "FIN-028",
+    "domain": "finance",
+    "category": "vendor_onboarding",
+    "text": "New vendor onboarding approved by Legal but missing KYV screening.",
+    "details": {
+      "kyv_sanctions_completed": false,
+      "legal_head_approved": true
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "FIN-POL-001 \u00a74.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_4",
+    "gold_policy_passage": "Emergency vendor onboarding without standard KYV screening authorized via Legal & Compliance override."
+  },
+  {
+    "id": "FIN-029",
+    "domain": "finance",
+    "category": "entertainment",
+    "text": "Client event costing $1,500 USD total without VP pre-approval.",
+    "details": {
+      "is_client_event": true,
+      "cost_per_person_usd": 80.0,
+      "total_event_cost_usd": 1500.0,
+      "attendees_listed": true,
+      "vp_preapproved": false
+    },
+    "gold_decision": "FLAG",
+    "gold_rule_id": "FIN-POL-001 \u00a75.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_5",
+    "gold_policy_passage": "Single client entertainment event exceeding $1,000 USD requires advance Department VP written authorization."
+  },
+  {
+    "id": "FIN-030",
+    "domain": "finance",
+    "category": "procurement",
+    "text": "Tier 1 purchase of $500 USD with manager approval.",
+    "details": {
+      "contract_amount_usd": 500.0,
+      "approvals_obtained": [
+        "manager"
+      ],
+      "vendor_quotes_count": 1
+    },
+    "gold_decision": "APPROVE",
+    "gold_rule_id": "FIN-POL-001 \u00a72.1",
+    "gold_chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "gold_policy_passage": "Tier 1 purchase within $1,000 threshold with manager approval."
+  }
+]

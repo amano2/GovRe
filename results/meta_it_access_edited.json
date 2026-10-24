@@ -1,0 +1,122 @@
+[
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_0",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "Global Enterprise IT Access Control & Information Security Governance Policy",
+    "text": "Policy Document: access_control_security_policy.md\nSection: Global Enterprise IT Access Control & Information Security Governance Policy\nContent:\n# Global Enterprise IT Access Control & Information Security Governance Policy\n\n**Document ID:** IT-SEC-001  \n**Effective Date:** January 1, 2026  \n**Applicability:** All Employees, System Administrators, DevOps Engineers, and Contractors  \n\n---",
+    "raw_section": "# Global Enterprise IT Access Control & Information Security Governance Policy\n\n**Document ID:** IT-SEC-001  \n**Effective Date:** January 1, 2026  \n**Applicability:** All Employees, System Administrators, DevOps Engineers, and Contractors  \n\n---"
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_1",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "1. Purpose and Scope",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 1. Purpose and Scope\nContent:\n## 1. Purpose and Scope\nThis policy mandates identity and access management (IAM) standards, principle of least privilege, production environment safeguards, privileged access management (PAM), API key security, data classification access controls, and access revocation protocols.\n\n---",
+    "raw_section": "## 1. Purpose and Scope\nThis policy mandates identity and access management (IAM) standards, principle of least privilege, production environment safeguards, privileged access management (PAM), API key security, data classification access controls, and access revocation protocols.\n\n---"
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_2",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "2. Principle of Least Privilege & Access Request Workflow",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 2. Principle of Least Privilege & Access Request Workflow\nContent:\n## 2. Principle of Least Privilege & Access Request Workflow",
+    "raw_section": "## 2. Principle of Least Privilege & Access Request Workflow"
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_3",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "2.1. Standard User Access & Role-Based Access Control (RBAC)",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 2.1. Standard User Access & Role-Based Access Control (RBAC)\nContent:\n### 2.1. Standard User Access & Role-Based Access Control (RBAC)\n- Employees are granted access strictly necessary to perform their primary job duties based on standardized departmental RBAC profiles.\n- Ad-hoc access to non-standard business applications (e.g., Salesforce Admin, Workday HR Admin, Billing portals) requires ticketed justification, direct manager approval, and application system owner sign-off.",
+    "raw_section": "### 2.1. Standard User Access & Role-Based Access Control (RBAC)\n- Employees are granted access strictly necessary to perform their primary job duties based on standardized departmental RBAC profiles.\n- Ad-hoc access to non-standard business applications (e.g., Salesforce Admin, Workday HR Admin, Billing portals) requires ticketed justification, direct manager approval, and application system owner sign-off."
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_4",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "2.2. Production Environment Access Controls",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 2.2. Production Environment Access Controls\nContent:\n### 2.2. Production Environment Access Controls\n- **Zero Standing Access:** Direct read/write access to production databases (SQL/NoSQL) and live cloud hosting infrastructure (AWS/GCP/Azure production subscriptions) is prohibited for standard development roles.\n- **Break-Glass Emergency Access:** Temporary elevated production access (Just-In-Time access) must be requested via PAM portal with a linked incident/change ticket (Jira / ServiceNow). Maximum grant duration is **8 hours**, after which credentials automatically rotate and revoke.\n- All break-glass access sessions are subject to mandatory session recording, keystroke logging, and post-incident manager review within 24 hours.\n\n---",
+    "raw_section": "### 2.2. Production Environment Access Controls\n- **Zero Standing Access:** Direct read/write access to production databases (SQL/NoSQL) and live cloud hosting infrastructure (AWS/GCP/Azure production subscriptions) is prohibited for standard development roles.\n- **Break-Glass Emergency Access:** Temporary elevated production access (Just-In-Time access) must be requested via PAM portal with a linked incident/change ticket (Jira / ServiceNow). Maximum grant duration is **8 hours**, after which credentials automatically rotate and revoke.\n- All break-glass access sessions are subject to mandatory session recording, keystroke logging, and post-incident manager review within 24 hours.\n\n---"
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_5",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "3. Privileged Accounts & Separation of Duties (SoD)",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 3. Privileged Accounts & Separation of Duties (SoD)\nContent:\n## 3. Privileged Accounts & Separation of Duties (SoD)",
+    "raw_section": "## 3. Privileged Accounts & Separation of Duties (SoD)"
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_6",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "3.1. Dual Custody & Separation of Duties",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 3.1. Dual Custody & Separation of Duties\nContent:\n### 3.1. Dual Custody & Separation of Duties\n- No single individual may hold both software code deployment privileges and production release approval authority for financial, medical, or PII systems.\n- Developers may not possess direct write or delete permissions in production logging (SIEM), audit trail repositories, or security monitoring tools.",
+    "raw_section": "### 3.1. Dual Custody & Separation of Duties\n- No single individual may hold both software code deployment privileges and production release approval authority for financial, medical, or PII systems.\n- Developers may not possess direct write or delete permissions in production logging (SIEM), audit trail repositories, or security monitoring tools."
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_7",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "3.2. Administrative Multi-Factor Authentication (MFA)",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 3.2. Administrative Multi-Factor Authentication (MFA)\nContent:\n### 3.2. Administrative Multi-Factor Authentication (MFA)\n- Hardware security keys (FIDO2 / WebAuthn / YubiKey) or Phishing-Resistant Authenticator Apps are mandatory for all root, cluster admin, and IAM administrator accounts.\n- SMS-based OTP is strictly prohibited as a standalone authentication factor for privileged access.\n\n---",
+    "raw_section": "### 3.2. Administrative Multi-Factor Authentication (MFA)\n- Hardware security keys (FIDO2 / WebAuthn / YubiKey) or Phishing-Resistant Authenticator Apps are mandatory for all root, cluster admin, and IAM administrator accounts.\n- SMS-based OTP is strictly prohibited as a standalone authentication factor for privileged access.\n\n---"
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_8",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "4. API Keys, Service Principals & Secret Management",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 4. API Keys, Service Principals & Secret Management\nContent:\n## 4. API Keys, Service Principals & Secret Management",
+    "raw_section": "## 4. API Keys, Service Principals & Secret Management"
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_9",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "4.1. Secret Storage & Rotation Standards",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 4.1. Secret Storage & Rotation Standards\nContent:\n### 4.1. Secret Storage & Rotation Standards\n- Hardcoding API keys, database connection strings, SSH private keys, or cloud tokens into source code repositories (Git) is a critical security violation.\n- All machine credentials and API tokens must be stored in centralized Enterprise Vaults (HashiCorp Vault / AWS Secrets Manager) and rotated at least every **60 calendar days**.",
+    "raw_section": "### 4.1. Secret Storage & Rotation Standards\n- Hardcoding API keys, database connection strings, SSH private keys, or cloud tokens into source code repositories (Git) is a critical security violation.\n- All machine credentials and API tokens must be stored in centralized Enterprise Vaults (HashiCorp Vault / AWS Secrets Manager) and rotated at least every **60 calendar days**."
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_10",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "4.2. Third-Party Service Account Integration",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 4.2. Third-Party Service Account Integration\nContent:\n### 4.2. Third-Party Service Account Integration\n- Granting external SaaS vendors or third-party AI integrations read-only or read-write access to internal data warehouses requires Information Security (CISO team) architecture review and signed Data Processing Agreements (DPA).\n\n---",
+    "raw_section": "### 4.2. Third-Party Service Account Integration\n- Granting external SaaS vendors or third-party AI integrations read-only or read-write access to internal data warehouses requires Information Security (CISO team) architecture review and signed Data Processing Agreements (DPA).\n\n---"
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_11",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "5. Data Classification & Access Authorization",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 5. Data Classification & Access Authorization\nContent:\n## 5. Data Classification & Access Authorization",
+    "raw_section": "## 5. Data Classification & Access Authorization"
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_12",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "5.1. Data Classification Tiers",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 5.1. Data Classification Tiers\nContent:\n### 5.1. Data Classification Tiers\n- **Public:** Marketing assets, public website content (No authorization required).\n- **Internal / Confidential:** Internal memos, source code, financial projections (Restricted to active employees).\n- **Restricted / Highly Sensitive (PII / PHI / Payment Card Data):** Customer credit card numbers, health records, raw HR payroll files. Access requires explicit Data Protection Officer (DPO) authorization and must be encrypted at rest and in transit.",
+    "raw_section": "### 5.1. Data Classification Tiers\n- **Public:** Marketing assets, public website content (No authorization required).\n- **Internal / Confidential:** Internal memos, source code, financial projections (Restricted to active employees).\n- **Restricted / Highly Sensitive (PII / PHI / Payment Card Data):** Customer credit card numbers, health records, raw HR payroll files. Access requires explicit Data Protection Officer (DPO) authorization and must be encrypted at rest and in transit."
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_13",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "5.2. External Data Transfer & Removable Media",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 5.2. External Data Transfer & Removable Media\nContent:\n### 5.2. External Data Transfer & Removable Media\n- Downloading customer PII or confidential enterprise databases to unencrypted USB drives, personal devices, or unauthorized external cloud storage is strictly prohibited.\n\n---",
+    "raw_section": "### 5.2. External Data Transfer & Removable Media\n- Downloading customer PII or confidential enterprise databases to unencrypted USB drives, personal devices, or unauthorized external cloud storage is strictly prohibited.\n\n---"
+  },
+  {
+    "chunk_id": "it_access_access_control_security_policy_chunk_14",
+    "domain": "it_access",
+    "source_file": "access_control_security_policy.md",
+    "header": "6. Access Deprovisioning & Offboarding SLAs",
+    "text": "Policy Document: access_control_security_policy.md\nSection: 6. Access Deprovisioning & Offboarding SLAs\nContent:\n## 6. Access Deprovisioning & Offboarding SLAs\n1. **Voluntary Resignation / Standard Offboarding:** System access must be deprovisioned by IT Identity Ops at the close of the employee's final working day (**5:00 PM local time**).\n2. **Involuntary / Immediate Termination:** All SSO, VPN, email, and building access badges must be revoked immediately (maximum **15-minute SLA**) upon notification from HR Legal.\n3. **Quarterly Access Certification:** Department leads must review and recertify active access lists every 90 days. Uncertified dormant accounts (inactive > 45 days) are automatically disabled.",
+    "raw_section": "## 6. Access Deprovisioning & Offboarding SLAs\n1. **Voluntary Resignation / Standard Offboarding:** System access must be deprovisioned by IT Identity Ops at the close of the employee's final working day (**5:00 PM local time**).\n2. **Involuntary / Immediate Termination:** All SSO, VPN, email, and building access badges must be revoked immediately (maximum **15-minute SLA**) upon notification from HR Legal.\n3. **Quarterly Access Certification:** Department leads must review and recertify active access lists every 90 days. Uncertified dormant accounts (inactive > 45 days) are automatically disabled."
+  }
+]

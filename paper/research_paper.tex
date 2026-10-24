@@ -1,0 +1,212 @@
+\documentclass[sigconf,screen]{acmart}
+
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{microtype}
+\usepackage{balance}
+
+% -------------------------------------------------------------
+% Layout and Spacing Calibration
+% -------------------------------------------------------------
+% Adjust gutter width between the two columns to eliminate word collisions
+\setlength{\columnsep}{0.28in}
+\emergencystretch=2em
+\sloppy
+
+\setcopyright{none}
+\acmConference[FAccT '26]{ACM Conference on Fairness, Accountability, and Transparency}{2026}{}
+
+\begin{document}
+
+\title{Grounding Multi-Agent Governance in Retrieved Policy Evidence: An Empirical Multi-Domain Evaluation Against Rule-Based Baselines}
+
+\author{Aman Hossain}
+\affiliation{%
+  \institution{KIIT School of Computer Science and Engineering \& Department of Artificial Intelligence \& Data Science}
+  \city{Bhubaneswar}
+  \country{India}
+}
+\email{amanhossainmail@gmail.com}
+
+\begin{abstract}
+As large language model (LLM) multi-agent systems transition into enterprise operational workflows---handling human resources (HR), financial disbursements, and privileged IT infrastructure access---enforcing strict policy compliance is paramount. Current agent-guardrail systems (e.g., NeMo Guardrails, GuardAgent) predominantly enforce governance via manually-specified, hand-encoded rule engines. While deterministic, hardcoded rules suffer from critical vulnerabilities: they fail to generalize across unstructured organizational policies and silently diverge into stale, erroneous states whenever governing policy documents are updated without corresponding code redeployments.
+
+In this paper, we present the first rigorous, multi-domain empirical study investigating whether grounding an autonomous governance judge in dense retrieval of unstructured policy evidence outperforms hand-encoded rule-based baselines in decision accuracy, explainability, and policy-change robustness. We construct an open-source evaluation benchmark across three distinct enterprise domains: \textbf{HR Operations}, \textbf{Corporate Finance \& Procurement}, and \textbf{IT Access Control \& Security} ($N=90$ gold-labeled scenarios across compliant, prohibited, and ambiguous escalation cases). All outcomes are reported with empirical 1,000-iteration Bootstrap 95\% Confidence Intervals and paired two-tailed McNemar's exact significance tests. 
+
+Our findings reveal a fundamental trade-off: while hand-crafted rule engines achieve high accuracy on static numerical thresholds, they are fragile to policy evolution. In our headline policy-change robustness experiment ($N=30$), static rule engines suffered a catastrophic \textbf{70.0\% stale-code failure rate} post-edit, whereas retrieval-grounded governance dynamically adapted with \textbf{zero code modifications} via vector re-indexing alone, achieving \textbf{76.7\% accuracy} ($p = 0.00131$, McNemar paired test). Furthermore, we demonstrate that a \textbf{Hybrid Tiered Governance Router (System C)} bridges operational constraints, shielding LLM inference on deterministic checks ($<0.02$ ms) while reserving retrieval grounding for nuanced exceptions. Finally, an independent blind human validation audit confirms \textbf{91.7\% observed agreement} (22/24) with a Cohen's Kappa of $\kappa = 0.7500$ (Substantial Agreement).
+\end{abstract}
+
+\keywords{Multi-Agent Systems, AI Governance, Retrieval-Augmented Generation, Guardrails, Empirical Evaluation, Policy Drift.}
+
+\maketitle
+
+\section{Introduction}
+Autonomous multi-agent systems powered by Large Language Models (LLMs) are rapidly assuming high-stakes operational roles across enterprise environments, executing tasks ranging from processing employee leave to approving purchase orders and issuing privileged infrastructure credentials \cite{xi2023rise}. However, unrestricted agent autonomy poses severe organizational risks, including compliance breaches, unauthorized financial exposure, and security violations.
+
+To mitigate these risks, industry has invested heavily in LLM guardrail frameworks \cite{rebedea2023nemo, chen2024guardagent}. The dominant paradigm in existing systems is \textbf{manual rule specification}: human software engineers translate natural-language policy documents into hardcoded conditional trees (e.g., Python \texttt{if/else} logic or Colang scripts).
+
+Despite their ubiquity, hand-encoded rule engines exhibit three fundamental deficiencies:
+\begin{enumerate}
+    \item \textbf{The Policy-Code Drift Dilemma:} Organizational policies are living documents. In rule-based architectures, any policy amendment requires manual code refactoring and redeployment. In practice, code inevitably lags behind updated policy documents, leading to silent governance failures where agents enforce obsolete rules.
+    \item \textbf{Incomplete Edge-Case Coverage:} Real-world enterprise policies contain nuanced exceptions, multi-role separation of duties (SoD), and qualitative escalation criteria that are combinatorially intractable to hand-encode exhaustively.
+    \item \textbf{Traceability Deficits:} When a rule engine flags or blocks an action, it outputs an internal rule ID rather than a human-verifiable, context-rich citation grounded in the authoritative policy text.
+\end{enumerate}
+
+\section{Related Work}
+\subsection{LLM Guardrails \& Multi-Agent Safety}
+Ensuring that LLM agents adhere to constraints has catalyzed extensive research. NeMo Guardrails \cite{rebedea2023nemo} introduced programmable rails using Colang to steer conversational flow and enforce deterministic guardrails. GuardAgent \cite{chen2024guardagent} developed an LLM-based safeguarding framework for multi-agent interactions. While these systems provide structured validation, they fundamentally rely on human developers to pre-program guardrail definitions or hardcoded execution rules, creating high maintenance overhead when organizational policies evolve.
+
+\subsection{Retrieval-Augmented Generation for Governance}
+Retrieval-Augmented Generation (RAG) \cite{lewis2020retrieval} has proven exceptionally effective at grounding LLM outputs in verified external knowledge and eliminating hallucinations \cite{huang2023survey}. However, prior RAG literature has focused overwhelmingly on question answering, search, and document summarization. Applying dense retrieval directly as a \textbf{first-class governance judge}---where retrieved chunks serve as authoritative legal evidence for ternary \texttt{APPROVE}/\texttt{FLAG}/\texttt{BLOCK} decisions---remains under-explored, particularly across paired multi-domain benchmarks.
+
+\section{System Architectures}
+
+\subsection{Formal Problem Formulation}
+Let an operational request be represented as $x = (t_x, \mathbf{p}_x, d)$, where $t_x$ denotes natural-language text, $\mathbf{p}_x$ represents structured parameters, and $d \in \{\text{HR}, \text{Finance}, \text{IT\_Access}\}$. Let $\mathcal{D}_d = \{c_1, \dots, c_K\}$ be the authoritative enterprise policy document corpus partitioned into semantic chunks. The governance system maps $(x, \mathcal{D}_d)$ to:
+\begin{equation}
+\hat{y} = (y, \text{cite}, \text{reason}), \quad y \in \{\text{APPROVE}, \text{FLAG}, \text{BLOCK}\}
+\end{equation}
+
+\subsection{System A: Rule-Based Baseline Engine}
+System A evaluates incoming requests via hand-crafted decision functions $f_{\text{rules}}^{(d)}(x)$ implementing explicit business logic predicates:
+\begin{equation}
+f_{\text{rules}}^{(d)}(x) = \begin{cases} 
+\text{BLOCK}, & \text{if } \bigvee_{j} \phi_j^{\text{prohibit}}(x) \\
+\text{FLAG}, & \text{if } \bigvee_{k} \phi_k^{\text{escalate}}(x) \\
+\text{APPROVE}, & \text{otherwise}
+\end{cases}
+\end{equation}
+
+\subsection{System B: Retrieval-Grounded Governance Judge}
+System B operates without domain-specific code branching via a two-stage retrieve-and-judge pipeline:
+\begin{enumerate}
+    \item \textbf{Hybrid Semantic Retrieval:} We compute dense query embeddings using \texttt{all-MiniLM-L6-v2} \cite{reimers2019sentence} against a FAISS \cite{johnson2019billion} \texttt{IndexFlatIP} vector store fused with BM25 lexical keyword matching:
+    \begin{equation}
+    S_{\text{hybrid}}(q, c_i) = 0.65 \cdot (\mathbf{v}_q^\top \mathbf{v}_{c_i}) + 0.35 \cdot \text{LexicalOverlap}(q, c_i)
+    \end{equation}
+    \item \textbf{Grounded Autonomous Judgment:} An LLM judge operating via OpenRouter zero-cost endpoints synthesizes the decision $y$, supporting citation excerpt $t^*$, and reasoning $r$ formatted as strict JSON.
+\end{enumerate}
+
+\subsection{System C: Hybrid Tiered Governance Router}
+System C implements a two-tier architecture:
+\begin{itemize}
+    \item \textbf{Tier 1 (Fast Deterministic Filter):} Arithmetic and numerical threshold checks are intercepted by System A ($< 0.02$ ms latency).
+    \item \textbf{Tier 2 (Retrieval Fallback):} Qualitative scenarios, policy exceptions, and boundary cases are forwarded to System B for grounded semantic evaluation.
+\end{itemize}
+
+% -------------------------------------------------------------
+% TABLE 1: MAIN EVALUATION RESULTS (FULL WIDTH, SCALED CLEANLY)
+% -------------------------------------------------------------
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{1.15}
+\caption{Main Evaluation Benchmark Results Across Three Enterprise Domains ($N=90$, 1,000 Bootstrap Resamples)}
+\label{tab:main_results}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Domain} & \textbf{$N$} & \textbf{Sys A Acc. [95\% CI]} & \textbf{Sys B Acc. [95\% CI]} & \textbf{Sys C (Hybrid) Acc. [95\% CI]} & \textbf{McNemar $p$} & \textbf{Odds Ratio} & \textbf{Sys A Exp.} & \textbf{Recall@$k$} \\
+\midrule
+HR Operations & 30 & \textbf{100.0\%} [100.0\%, 100.0\%] & 23.3\% [10.0\%, 36.7\%] & \textbf{86.7\%} [62.1\%, 93.3\%] & $p < 0.001$ & $\infty$ & 93.3\% & 20.0\% \\
+Expense / Finance & 30 & \textbf{100.0\%} [100.0\%, 100.0\%] & 30.0\% [10.0\%, 43.3\%] & \textbf{76.7\%} [55.3\%, 86.7\%] & $p < 0.001$ & $\infty$ & 100.0\% & 13.3\% \\
+IT Access Security & 30 & \textbf{86.7\%} [66.7\%, 93.3\%] & 20.0\% [6.7\%, 33.3\%] & \textbf{43.3\%} [23.3\%, 56.7\%] & $1 \times 10^{-5}$ & $21.0$ & 80.0\% & 6.7\% \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}
+
+\section{Experimental Results}
+
+\subsection{Benchmark Evaluation}
+Table~\ref{tab:main_results} reports the primary benchmark results. In domains dominated by deterministic arithmetic inequalities (HR and Finance), hand-crafted rule engines achieve 100\% accuracy. However, in IT Access Security, where policies involve complex Separation of Duties and emergency escalation context, System A degrades to 86.7\%. 
+
+Under continuous batch execution, free-tier cloud endpoints encountered burst rate limits, resulting in structured fail-safe fallback defaults for System B. System C (Hybrid Router) successfully shields against API constraints, achieving 86.7\% accuracy in HR and 76.7\% in Finance.
+
+\subsection{Policy-Change Robustness Experiment}
+To test adaptation to policy drift, we modified key operational thresholds in policy documents:
+\begin{itemize}
+    \item \textbf{HR:} Leave notice requirement reduced from 14 days $\to$ 5 business days for leaves exceeding 3 days.
+    \item \textbf{Finance:} P-Card receipt threshold raised from \$25 $\to$ \$50; Tier 2 ceiling expanded from \$10,000 $\to$ \$15,000.
+    \item \textbf{IT Access:} Break-glass emergency window extended from 4h $\to$ 8h; API secret rotation shortened from 90 $\to$ 60 days.
+\end{itemize}
+
+We re-evaluated both systems on $N=30$ targeted scenarios \textbf{without modifying System A's rule code} and \textbf{without modifying System B's code} (only re-indexing FAISS).
+
+% -------------------------------------------------------------
+% TABLE 2: POLICY CHANGE ROBUSTNESS (SCALED TO FIT SINGLE COLUMN)
+% -------------------------------------------------------------
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\caption{Policy-Change Robustness Performance ($N=30$ Targeted Scenarios Across Domains)}
+\label{tab:robustness}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Sys A (Static Rules)} & \textbf{Sys B (Re-indexed)} \\
+\midrule
+Overall Accuracy & \textbf{30.0\%} [13.3\%, 43.3\%] & \textbf{76.7\%} [53.3\%, 86.7\%] \\
+HR Accuracy & 30.0\% & \textbf{90.0\%} \\
+Finance Accuracy & 40.0\% & \textbf{70.0\%} \\
+IT Access Accuracy & 20.0\% & \textbf{70.0\%} \\
+Stale-Code Failure Rate & \textbf{70.0\%} & \textbf{0.0\%} \\
+McNemar $p$-value & \multicolumn{2}{c}{\textbf{$p = 0.00131$ (Significant)}} \\
+Required Code Changes & Manual Rewrite & \textbf{0 Lines of Code} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+As shown in Table~\ref{tab:robustness}, static rule engines suffered a catastrophic \textbf{70.0\% stale-code failure rate} post-edit, whereas retrieval-grounded governance dynamically adapted with zero code modifications to achieve \textbf{76.7\% [53.3\%, 86.7\%]} accuracy ($p = 0.00131$, paired McNemar exact test \cite{mcnemar1947note}).
+
+% -------------------------------------------------------------
+% TABLE 3: HUMAN VALIDATION AUDIT (SCALED TO COLUMN WIDTH)
+% -------------------------------------------------------------
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\caption{Explainability Scoring Human Validation Audit ($N=24$ Blind Evaluation)}
+\label{tab:human_audit}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{Empirical Value} & \textbf{Baseline} & \textbf{Interpretation} \\
+\midrule
+Observed Agreement ($P_o$) & 91.7\% (22/24) & 50.0\% & High Consensus \\
+Chance Agreement ($P_e$) & 66.7\% & -- & -- \\
+Cohen's Kappa ($\kappa$) & \textbf{0.7500} & 0.00 & Substantial Agreement \\
+False Positive Rate & 8.3\% (2/24) & -- & Negligible Distortion \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Human Validation Study}
+To verify the automated explainability scorer, an independent blind human audit was conducted on $N=24$ judgments (18 positive citations and 6 hard negative distractor citations). As detailed in Table~\ref{tab:human_audit}, the audit confirmed \textbf{91.7\% observed agreement} and a Cohen's Kappa of $\kappa = 0.7500$ \cite{cohen1960coefficient}, confirming high statistical reliability.
+
+\section{Discussion \& Limitations}
+In accordance with open science practices, we note several limitations:
+\begin{enumerate}
+    \item \textbf{Domain Scope:} While multi-domain, enterprise governance extends into specialized regulatory compliance (e.g., HIPAA, SOX) that require future investigation.
+    \item \textbf{Scalar Arithmetic Reasoning:} Small LLMs struggle with strict inequality boundaries, establishing why hybrid router filtering (System C) is essential in practice.
+    \item \textbf{Inference Infrastructure:} Cloud free-tier rate limits restrict throughput; production systems require dedicated on-premise inference engines.
+\end{enumerate}
+
+\section{Conclusion}
+This study demonstrates that while hand-encoded rule engines excel at static numerical boundaries, they suffer severe silent failures under policy drift (70.0\% stale error rate). Retrieval-grounded governance eliminates policy-code drift by dynamically grounding decisions in updated policy documents with zero code modifications ($p = 0.00131$). We recommend a \textbf{hybrid tiered governance architecture} combining fast deterministic rule filters with retrieval-grounded semantic judges.
+
+% Balance the two columns on the final page so the bibliography fills the page evenly
+\balance
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}

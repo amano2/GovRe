@@ -1,0 +1,138 @@
+[
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_0",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "Global Enterprise Finance & Procurement Governance Policy",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: Global Enterprise Finance & Procurement Governance Policy\nContent:\n# Global Enterprise Finance & Procurement Governance Policy\n\n**Document ID:** FIN-POL-001  \n**Effective Date:** January 1, 2026  \n**Applicability:** All Global Business Units, Employees, and Purchasing Authorities  \n\n---",
+    "raw_section": "# Global Enterprise Finance & Procurement Governance Policy\n\n**Document ID:** FIN-POL-001  \n**Effective Date:** January 1, 2026  \n**Applicability:** All Global Business Units, Employees, and Purchasing Authorities  \n\n---"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_1",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "1. Purpose and Scope",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 1. Purpose and Scope\nContent:\n## 1. Purpose and Scope\nThis policy establishes mandatory spending limits, procurement authorization thresholds, vendor onboarding requirements, corporate credit card governance, and anti-fraud financial controls across all departments.\n\n---",
+    "raw_section": "## 1. Purpose and Scope\nThis policy establishes mandatory spending limits, procurement authorization thresholds, vendor onboarding requirements, corporate credit card governance, and anti-fraud financial controls across all departments.\n\n---"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_2",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "2. Procurement Authorization & Spending Approval Matrix",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 2. Procurement Authorization & Spending Approval Matrix\nContent:\n## 2. Procurement Authorization & Spending Approval Matrix",
+    "raw_section": "## 2. Procurement Authorization & Spending Approval Matrix"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_3",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "2.1. Transaction Approval Thresholds (Single Purchase Order / Contract)",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 2.1. Transaction Approval Thresholds (Single Purchase Order / Contract)\nContent:\n### 2.1. Transaction Approval Thresholds (Single Purchase Order / Contract)\n- **Tier 1 (Up to $1,000 USD):** Requires Direct Manager approval.\n- **Tier 2 ($1,001 to $15,000 USD):** Requires Direct Manager and Department Head (Director) approval.\n- **Tier 3 ($15,001 to $50,000 USD):** Requires Department Head, Procurement Lead, and Finance Controller approval.\n- **Tier 4 (Over $50,000 USD):** Requires Chief Financial Officer (CFO) and Chief Executive Officer (CEO) sign-off, alongside competitive bidding documentation (minimum 3 vendor quotes).",
+    "raw_section": "### 2.1. Transaction Approval Thresholds (Single Purchase Order / Contract)\n- **Tier 1 (Up to $1,000 USD):** Requires Direct Manager approval.\n- **Tier 2 ($1,001 to $15,000 USD):** Requires Direct Manager and Department Head (Director) approval.\n- **Tier 3 ($15,001 to $50,000 USD):** Requires Department Head, Procurement Lead, and Finance Controller approval.\n- **Tier 4 (Over $50,000 USD):** Requires Chief Financial Officer (CFO) and Chief Executive Officer (CEO) sign-off, alongside competitive bidding documentation (minimum 3 vendor quotes)."
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_4",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "2.2. Split Invoicing Prohibition (Anti-Structuring)",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 2.2. Split Invoicing Prohibition (Anti-Structuring)\nContent:\n### 2.2. Split Invoicing Prohibition (Anti-Structuring)\n- Intentionally splitting a single procurement order, software license batch, or service invoice into multiple smaller invoices to circumvent approval limits or bypass higher-tier authorization is strictly prohibited and constitutes an immediate audit violation.\n\n---",
+    "raw_section": "### 2.2. Split Invoicing Prohibition (Anti-Structuring)\n- Intentionally splitting a single procurement order, software license batch, or service invoice into multiple smaller invoices to circumvent approval limits or bypass higher-tier authorization is strictly prohibited and constitutes an immediate audit violation.\n\n---"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_5",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "3. Corporate Credit Card (P-Card) Governance",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 3. Corporate Credit Card (P-Card) Governance\nContent:\n## 3. Corporate Credit Card (P-Card) Governance",
+    "raw_section": "## 3. Corporate Credit Card (P-Card) Governance"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_6",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "3.1. Card Usage & Permissible Expenses",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 3.1. Card Usage & Permissible Expenses\nContent:\n### 3.1. Card Usage & Permissible Expenses\n- Corporate P-Cards are issued solely for legitimate, pre-approved business operations, SaaS subscription renewals, emergency field supplies, and authorized business travel.\n- P-Cards must never be used for personal expenses, personal cash advances, gambling, cryptocurrency transactions, or luxury/spa services.",
+    "raw_section": "### 3.1. Card Usage & Permissible Expenses\n- Corporate P-Cards are issued solely for legitimate, pre-approved business operations, SaaS subscription renewals, emergency field supplies, and authorized business travel.\n- P-Cards must never be used for personal expenses, personal cash advances, gambling, cryptocurrency transactions, or luxury/spa services."
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_7",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "3.2. Receipt Reconciliation & Settlement Timelines",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 3.2. Receipt Reconciliation & Settlement Timelines\nContent:\n### 3.2. Receipt Reconciliation & Settlement Timelines\n- All P-Card transactions must be reconciled in the ERP system with itemized receipts uploaded within **7 business days** of transaction posting.\n- Transactions exceeding **$50 USD** require an itemized digital tax invoice.\n- If an employee fails to submit receipts within **30 calendar days**, the card will be suspended, and non-reconciled balances may be deducted from payroll.\n\n---",
+    "raw_section": "### 3.2. Receipt Reconciliation & Settlement Timelines\n- All P-Card transactions must be reconciled in the ERP system with itemized receipts uploaded within **7 business days** of transaction posting.\n- Transactions exceeding **$50 USD** require an itemized digital tax invoice.\n- If an employee fails to submit receipts within **30 calendar days**, the card will be suspended, and non-reconciled balances may be deducted from payroll.\n\n---"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_8",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "4. Vendor Management, Consulting & Third-Party Contracting",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 4. Vendor Management, Consulting & Third-Party Contracting\nContent:\n## 4. Vendor Management, Consulting & Third-Party Contracting",
+    "raw_section": "## 4. Vendor Management, Consulting & Third-Party Contracting"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_9",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "4.1. Vendor Due Diligence & Sanctions Screening",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 4.1. Vendor Due Diligence & Sanctions Screening\nContent:\n### 4.1. Vendor Due Diligence & Sanctions Screening\n- All new commercial vendors, contractors, and service providers must complete vendor risk assessment (KYV), tax registration verification (W-9 / W-8BEN), and sanctions screening prior to contract execution or initial invoice payment.\n- Emergency vendor onboarding without compliance clearance requires explicit written sign-off from the Head of Legal & Compliance.",
+    "raw_section": "### 4.1. Vendor Due Diligence & Sanctions Screening\n- All new commercial vendors, contractors, and service providers must complete vendor risk assessment (KYV), tax registration verification (W-9 / W-8BEN), and sanctions screening prior to contract execution or initial invoice payment.\n- Emergency vendor onboarding without compliance clearance requires explicit written sign-off from the Head of Legal & Compliance."
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_10",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "4.2. Advance Payments & Retainers",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 4.2. Advance Payments & Retainers\nContent:\n### 4.2. Advance Payments & Retainers\n- Advance payments to suppliers exceeding **30% of total contract value** are prohibited unless backed by a performance bank guarantee or approved by the Finance Controller.\n- 100% upfront payment for software licenses is permitted only for standard commercial off-the-shelf (COTS) SaaS vendors with annual commitments under $25,000 USD.\n\n---",
+    "raw_section": "### 4.2. Advance Payments & Retainers\n- Advance payments to suppliers exceeding **30% of total contract value** are prohibited unless backed by a performance bank guarantee or approved by the Finance Controller.\n- 100% upfront payment for software licenses is permitted only for standard commercial off-the-shelf (COTS) SaaS vendors with annual commitments under $25,000 USD.\n\n---"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_11",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "5. Client Entertainment, Team Dinners & Gifts",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 5. Client Entertainment, Team Dinners & Gifts\nContent:\n## 5. Client Entertainment, Team Dinners & Gifts",
+    "raw_section": "## 5. Client Entertainment, Team Dinners & Gifts"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_12",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "5.1. Client Entertainment & Dining",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 5.1. Client Entertainment & Dining\nContent:\n### 5.1. Client Entertainment & Dining\n- Business meals hosted for prospective or active clients are reimbursable up to **$100 USD per attendee** (including taxes and gratuity up to 20%).\n- Itemized dining receipts must list the names, affiliations, and business purpose of all attendees.\n- Total entertainment spend exceeding **$1,000 USD for a single event** requires advance written authorization from the Department Vice President.",
+    "raw_section": "### 5.1. Client Entertainment & Dining\n- Business meals hosted for prospective or active clients are reimbursable up to **$100 USD per attendee** (including taxes and gratuity up to 20%).\n- Itemized dining receipts must list the names, affiliations, and business purpose of all attendees.\n- Total entertainment spend exceeding **$1,000 USD for a single event** requires advance written authorization from the Department Vice President."
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_13",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "5.2. Internal Team Events & Celebrations",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 5.2. Internal Team Events & Celebrations\nContent:\n### 5.2. Internal Team Events & Celebrations\n- Quarterly departmental team dinners or morale events are budgeted at a ceiling of **$40 USD per employee**.\n- Internal milestone celebrations exceeding $500 USD total require prior manager approval.\n\n---",
+    "raw_section": "### 5.2. Internal Team Events & Celebrations\n- Quarterly departmental team dinners or morale events are budgeted at a ceiling of **$40 USD per employee**.\n- Internal milestone celebrations exceeding $500 USD total require prior manager approval.\n\n---"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_14",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "6. Capital Expenditures (CapEx) & Asset Lifecycle",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 6. Capital Expenditures (CapEx) & Asset Lifecycle\nContent:\n## 6. Capital Expenditures (CapEx) & Asset Lifecycle",
+    "raw_section": "## 6. Capital Expenditures (CapEx) & Asset Lifecycle"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_15",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "6.1. Hardware & IT Equipment Procurement",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 6.1. Hardware & IT Equipment Procurement\nContent:\n### 6.1. Hardware & IT Equipment Procurement\n- All laptops, monitors, servers, and telecommunication hardware must be procured exclusively via Centralized IT Procurement. Individual employee purchases of computing devices via expense reimbursement are strictly prohibited unless authorized during catastrophic field failure.\n- Assets costing **$1,500 USD or greater** must be tagged in the Enterprise Fixed Asset Register with depreciation schedules.\n\n---",
+    "raw_section": "### 6.1. Hardware & IT Equipment Procurement\n- All laptops, monitors, servers, and telecommunication hardware must be procured exclusively via Centralized IT Procurement. Individual employee purchases of computing devices via expense reimbursement are strictly prohibited unless authorized during catastrophic field failure.\n- Assets costing **$1,500 USD or greater** must be tagged in the Enterprise Fixed Asset Register with depreciation schedules.\n\n---"
+  },
+  {
+    "chunk_id": "finance_expense_and_procurement_policy_chunk_16",
+    "domain": "finance",
+    "source_file": "expense_and_procurement_policy.md",
+    "header": "7. Audit Compliance & Disciplinary Framework",
+    "text": "Policy Document: expense_and_procurement_policy.md\nSection: 7. Audit Compliance & Disciplinary Framework\nContent:\n## 7. Audit Compliance & Disciplinary Framework\n1. All financial records, purchase orders, and expense claims are subject to quarterly internal audits and annual statutory review.\n2. Submission of fraudulent invoices, fabricated receipts, unauthorized kickback arrangements, or intentional misallocation of budget codes will result in immediate termination and criminal referral.",
+    "raw_section": "## 7. Audit Compliance & Disciplinary Framework\n1. All financial records, purchase orders, and expense claims are subject to quarterly internal audits and annual statutory review.\n2. Submission of fraudulent invoices, fabricated receipts, unauthorized kickback arrangements, or intentional misallocation of budget codes will result in immediate termination and criminal referral."
+  }
+]

@@ -1,0 +1,4 @@
+Domain,N,System A Acc (%),System B Acc (%),System C Acc (%),McNemar p-val,Significant (p<0.05),Odds Ratio,System A Explain (%),System B Explain (%),API Fail Rate,Retrieval Recall@k
+HR Operations,30,"100.0% [100.0%, 100.0%]","23.3% [10.0%, 36.7%]","86.7% [62.1%, 93.3%]",0.00000,True,inf,93.3%,0.0%,100.0%,20.0%
+Expense / Finance,30,"100.0% [100.0%, 100.0%]","30.0% [10.0%, 43.3%]","76.7% [55.3%, 86.7%]",0.00000,True,inf,100.0%,0.0%,100.0%,13.3%
+IT Access Security,30,"86.7% [66.7%, 93.3%]","20.0% [6.7%, 33.3%]","43.3% [23.3%, 56.7%]",0.00001,True,21.0,80.0%,0.0%,100.0%,6.7%
