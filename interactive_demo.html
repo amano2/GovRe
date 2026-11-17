@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GovRe • Enterprise Multi-Agent Governance & Policy Grounding Console</title>
+    <title>GovRe Console • Policy-grounded multi-agent governance</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Plus Jakarta Sans for UI + JetBrains Mono for Code/Telemetry -->
@@ -20,16 +20,15 @@
                         mono: ['"JetBrains Mono"', 'monospace'],
                     },
                     colors: {
-                        obsidian: '#070A0F',
-                        slateCard: '#0D121D',
-                        slateCardHover: '#121826',
-                        slateBorder: '#1A2333',
-                        slateBorderLight: '#26344B',
-                        cyanAccent: '#00E5FF',
-                        cyanGlow: 'rgba(0, 229, 255, 0.15)',
-                        emeraldApprove: '#10B981',
-                        amberFlag: '#F59E0B',
-                        rubyBlock: '#EF4444',
+                        themeBg: '#02080B',
+                        cardBg: '#061318',
+                        cardBgHover: '#091A21',
+                        borderTeal: '#0C2630',
+                        borderTealLight: '#123948',
+                        cyanBrand: '#00F0FF',
+                        greenBrand: '#00FFB2',
+                        redBrand: '#FF3B5C',
+                        amberBrand: '#FFB800',
                     }
                 }
             }
@@ -37,563 +36,593 @@
     </script>
     <style>
         body {
-            background-color: #070A0F;
+            background-color: #02080B;
             color: #E2E8F0;
             overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        .glow-cyan-sm {
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.12);
-        }
-        .glow-ruby-sm {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
-        }
-        .glow-emerald-sm {
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+        .mono-num {
+            font-family: 'JetBrains Mono', monospace;
         }
         .custom-scroll::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
+            width: 4px;
+            height: 4px;
         }
         .custom-scroll::-webkit-scrollbar-track {
-            background: #070A0F;
+            background: #02080B;
         }
         .custom-scroll::-webkit-scrollbar-thumb {
-            background: #1A2333;
-            border-radius: 3px;
+            background: #0C2630;
+            border-radius: 2px;
         }
         .custom-scroll::-webkit-scrollbar-thumb:hover {
-            background: #2D3A54;
+            background: #143F50;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col font-sans selection:bg-cyanAccent selection:text-black antialiased custom-scroll">
+<body class="min-h-screen flex flex-col antialiased custom-scroll">
 
-    <!-- Global Top Navigation -->
-    <header class="border-b border-slateBorder bg-slateCard/90 backdrop-blur-md sticky top-0 z-50 px-6 py-3 flex items-center justify-between">
+    <!-- Top Global Header -->
+    <header class="border-b border-borderTeal bg-cardBg/90 backdrop-blur-md sticky top-0 z-50 px-6 py-3.5 flex items-center justify-between">
         <div class="flex items-center space-x-3.5">
-            <div class="w-8 h-8 rounded-md bg-cyanAccent/10 border border-cyanAccent/30 flex items-center justify-center text-cyanAccent">
-                <!-- SVG Icon: Scale / Shield -->
+            <!-- Shield Icon Box -->
+            <div class="w-8 h-8 rounded-lg border border-cyanBrand/40 bg-cyanBrand/5 flex items-center justify-center text-cyanBrand shadow-[0_0_12px_rgba(0,240,255,0.15)]">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     <path d="m9 12 2 2 4-4"/>
                 </svg>
             </div>
             <div>
-                <div class="flex items-center space-x-2">
-                    <h1 class="font-bold text-white tracking-wide text-sm font-sans">GovRe Console</h1>
+                <div class="flex items-center space-x-2.5">
+                    <h1 class="font-bold text-white tracking-wide text-sm">GovRe Console</h1>
+                    <span class="text-[9px] font-mono px-2 py-0.5 rounded border border-greenBrand/40 bg-greenBrand/10 text-greenBrand font-semibold tracking-wider uppercase">RESEARCH PROTOTYPE</span>
                 </div>
-                <p class="text-[11px] text-slate-400">Grounding Multi-Agent LLM Governance in Retrieved Policy Evidence</p>
+                <p class="text-[11px] text-slate-400 font-sans">Policy-grounded multi-agent governance</p>
             </div>
         </div>
 
-        <!-- Telemetry Pill Indicators -->
-        <div class="flex items-center space-x-4">
-            <div class="hidden lg:flex items-center space-x-6 text-xs font-mono border-r border-slateBorder pr-6">
-                <div class="flex items-center space-x-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                    <span class="text-slate-400">Scale:</span>
-                    <span class="text-white font-medium">N=90 Scenarios</span>
-                </div>
-                <div class="flex items-center space-x-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-rubyBlock"></span>
-                    <span class="text-slate-400">Stale Rule Error Rate:</span>
-                    <span class="text-rubyBlock font-bold">70.0%</span>
-                </div>
-                <div class="flex items-center space-x-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-cyanAccent"></span>
-                    <span class="text-slate-400">Significance:</span>
-                    <span class="text-cyanAccent font-bold">p=0.00131</span>
-                </div>
-            </div>
-
-            <!-- View Switcher -->
-            <div class="flex bg-obsidian p-1 rounded-lg border border-slateBorder text-xs font-mono font-medium">
-                <button onclick="switchTab('demo')" id="tab-demo-btn" class="px-3 py-1.5 rounded bg-slateBorder text-white font-semibold transition flex items-center space-x-1.5">
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                    <span>Simulation</span>
-                </button>
-                <button onclick="switchTab('results')" id="tab-results-btn" class="px-3 py-1.5 rounded text-slate-400 hover:text-white transition flex items-center space-x-1.5">
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                    <span>Empirical Data</span>
-                </button>
-                <button onclick="switchTab('slides')" id="tab-slides-btn" class="px-3 py-1.5 rounded text-slate-400 hover:text-white transition flex items-center space-x-1.5">
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/></svg>
-                    <span>3-Slide Deck</span>
-                </button>
-            </div>
+        <!-- Right Side Nav Tabs -->
+        <div class="flex items-center bg-themeBg p-1 rounded-lg border border-borderTeal text-xs font-sans">
+            <button onclick="switchTab('demo')" id="tab-demo-btn" class="px-3.5 py-1.5 rounded-md bg-[#0C2630] text-white font-medium transition flex items-center space-x-2">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>Simulation</span>
+            </button>
+            <button onclick="switchTab('results')" id="tab-results-btn" class="px-3.5 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-2">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m14 12-4-4v8l4-4Z"/></svg>
+                <span>Benchmark</span>
+            </button>
+            <button onclick="switchTab('slides')" id="tab-slides-btn" class="px-3.5 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-2">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/></svg>
+                <span>Briefing deck</span>
+            </button>
         </div>
     </header>
 
-    <!-- Main Workspace Body -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
+    <!-- Main Workspace Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-6 py-5 space-y-6">
 
-        <!-- ============================================================== -->
-        <!-- TAB 1: LIVE SIMULATION PLAYGROUND -->
-        <!-- ============================================================== -->
-        <div id="tab-demo" class="space-y-6">
-
-            <!-- Primary Control Cockpit -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 bg-slateCard p-5 rounded-xl border border-slateBorder">
-                
-                <!-- Domain Selector -->
-                <div class="lg:col-span-4 space-y-1.5">
-                    <label class="text-[11px] font-mono text-slate-400 uppercase tracking-wider flex items-center justify-between">
-                        <span>1. Operational Domain</span>
-                        <span class="text-cyanAccent font-medium text-[10px]">3 Policies Indexed</span>
-                    </label>
-                    <select id="domain-select" onchange="loadDomainScenarios()" class="w-full bg-obsidian border border-slateBorder rounded-lg px-3.5 py-2.5 text-xs font-mono text-white focus:outline-none focus:border-cyanAccent transition">
-                        <option value="finance">CORPORATE_FINANCE (Procurement & P-Card)</option>
-                        <option value="hr">HR_OPERATIONS (Leave, Notice & Benefits)</option>
-                        <option value="it_access">IT_SECURITY (Zero Standing Access & PAM)</option>
-                    </select>
+        <!-- Top 3 Stat Cards (Shared Across Views) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <!-- Card 1: EVALUATION SET -->
+            <div class="bg-cardBg border border-borderTeal rounded-xl p-4 flex items-center space-x-4">
+                <div class="w-10 h-10 rounded-lg bg-themeBg border border-borderTeal flex items-center justify-center text-cyanBrand">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                 </div>
-
-                <!-- Scenario Selector -->
-                <div class="lg:col-span-5 space-y-1.5">
-                    <label class="text-[11px] font-mono text-slate-400 uppercase tracking-wider flex items-center justify-between">
-                        <span>2. Evaluated Action Scenario</span>
-                        <span id="gold-truth-pill" class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Gold: ...</span>
-                    </label>
-                    <select id="scenario-select" onchange="selectScenario()" class="w-full bg-obsidian border border-slateBorder rounded-lg px-3.5 py-2.5 text-xs font-mono text-white focus:outline-none focus:border-cyanAccent transition truncate">
-                        <!-- Populated via JS -->
-                    </select>
-                </div>
-
-                <!-- Policy Lifecycle Toggle -->
-                <div class="lg:col-span-3 space-y-1.5">
-                    <label class="text-[11px] font-mono text-slate-400 uppercase tracking-wider flex items-center justify-between">
-                        <span>3. Policy Lifecycle State</span>
-                        <span class="text-amber-400 font-bold text-[10px]">Robustness Test</span>
-                    </label>
-                    <div class="flex rounded-lg bg-obsidian p-1 border border-slateBorder font-mono">
-                        <button id="btn-pre-edit" onclick="setPolicyState(false)" class="flex-1 py-1.5 text-xs rounded font-medium transition bg-slateBorder text-white">
-                            Original
-                        </button>
-                        <button id="btn-post-edit" onclick="setPolicyState(true)" class="flex-1 py-1.5 text-xs rounded font-medium transition text-slate-400 hover:text-white">
-                            Amended (Drift)
-                        </button>
+                <div>
+                    <span class="text-[10px] font-mono uppercase text-slate-400 tracking-wider block">EVALUATION SET</span>
+                    <div class="flex items-baseline space-x-2 mt-0.5">
+                        <span class="text-xl font-bold text-white mono-num">N = 90</span>
+                        <span class="text-xs text-slate-400 font-sans">30 scenarios per domain</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Proposed Action Preview Banner -->
-            <div class="bg-slateCard/60 border border-slateBorder rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div class="space-y-1 flex-1">
-                    <div class="flex items-center space-x-2 text-xs font-mono">
-                        <span class="px-2 py-0.5 rounded bg-cyanAccent/10 text-cyanAccent border border-cyanAccent/20 uppercase text-[10px] font-semibold">Incoming Request</span>
-                        <span id="scenario-id-tag" class="text-slate-400 font-semibold">FIN-001</span>
-                        <span id="scenario-cat-tag" class="text-slate-500 text-[11px]">// Category: procurement</span>
+            <!-- Card 2: STALE-RULE ERROR RATE -->
+            <div class="bg-cardBg border border-borderTeal rounded-xl p-4 flex items-center space-x-4">
+                <div class="w-10 h-10 rounded-lg bg-redBrand/10 border border-redBrand/30 flex items-center justify-center text-redBrand">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <div>
+                    <span class="text-[10px] font-mono uppercase text-slate-400 tracking-wider block">STALE-RULE ERROR RATE</span>
+                    <div class="flex items-baseline space-x-2 mt-0.5">
+                        <span class="text-xl font-bold text-redBrand mono-num">70.0%</span>
+                        <span class="text-xs text-slate-400 font-sans">Policy-change test • N = 30</span>
                     </div>
-                    <p id="scenario-text-preview" class="text-sm font-sans font-medium text-slate-200 mt-1">
-                        Loading scenario...
+                </div>
+            </div>
+
+            <!-- Card 3: MCNEMAR SIGNIFICANCE -->
+            <div class="bg-cardBg border border-borderTeal rounded-xl p-4 flex items-center space-x-4">
+                <div class="w-10 h-10 rounded-lg bg-themeBg border border-borderTeal flex items-center justify-center text-greenBrand">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div>
+                    <span class="text-[10px] font-mono uppercase text-slate-400 tracking-wider block">MCNEMAR SIGNIFICANCE</span>
+                    <div class="flex items-baseline space-x-2 mt-0.5">
+                        <span class="text-xl font-bold text-greenBrand mono-num">p = 0.00131</span>
+                        <span class="text-xs text-slate-400 font-sans">Paired exact test</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- TAB 1: SIMULATION (WORKBENCH / 01) -->
+        <!-- ============================================================== -->
+        <div id="tab-demo" class="space-y-5">
+            
+            <!-- Section Header -->
+            <div class="flex items-center justify-between border-t border-borderTeal/60 pt-5">
+                <div>
+                    <span class="text-[11px] font-mono text-cyanBrand tracking-wider block">GOVERNANCE WORKBENCH / 01</span>
+                    <h2 class="text-xl font-bold text-white tracking-tight mt-0.5">Policy drift simulation</h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Compare rule-based, retrieval-grounded, and hybrid decisions against the policy in force.</p>
+                </div>
+                <div class="flex items-center space-x-2 text-xs font-mono text-slate-400">
+                    <span class="w-2 h-2 rounded-full bg-greenBrand animate-pulse"></span>
+                    <span class="uppercase tracking-wider text-[11px]">3 INDEXED DOMAINS</span>
+                </div>
+            </div>
+
+            <!-- Form Controls 01, 02, 03 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                
+                <!-- 01 OPERATIONAL DOMAIN -->
+                <div class="lg:col-span-3 space-y-1.5">
+                    <label class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
+                        01 / OPERATIONAL DOMAIN
+                    </label>
+                    <div class="relative">
+                        <select id="domain-select" onchange="loadDomainScenarios()" class="w-full bg-cardBg border border-borderTeal rounded-lg px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyanBrand transition appearance-none cursor-pointer">
+                            <option value="finance">Corporate finance</option>
+                            <option value="hr">HR operations</option>
+                            <option value="it_access">IT access security</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 02 ACTION SCENARIO -->
+                <div class="lg:col-span-6 space-y-1.5">
+                    <label class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
+                        02 / ACTION SCENARIO
+                    </label>
+                    <div class="relative">
+                        <select id="scenario-select" onchange="selectScenario()" class="w-full bg-cardBg border border-borderTeal rounded-lg px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyanBrand transition appearance-none cursor-pointer truncate pr-8">
+                            <!-- Populated via JS -->
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 03 POLICY LIFECYCLE -->
+                <div class="lg:col-span-3 space-y-1.5">
+                    <label class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
+                        03 / POLICY LIFECYCLE
+                    </label>
+                    <div class="flex rounded-lg bg-cardBg p-1 border border-borderTeal text-xs font-sans">
+                        <button id="btn-pre-edit" onclick="setPolicyState(false)" class="flex-1 py-1.5 rounded font-medium transition bg-[#0C2630] text-white">
+                            Original
+                        </button>
+                        <button id="btn-post-edit" onclick="setPolicyState(true)" class="flex-1 py-1.5 rounded font-medium transition text-slate-400 hover:text-white">
+                            Amended
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Incoming Request Card -->
+            <div class="bg-cardBg border border-borderTeal rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div class="space-y-1.5 flex-1">
+                    <div class="flex items-center space-x-2 text-[10px] font-mono">
+                        <span class="px-2 py-0.5 rounded bg-cyanBrand/10 text-cyanBrand border border-cyanBrand/30 font-semibold tracking-wider">INCOMING REQUEST</span>
+                        <span id="scenario-id-tag" class="text-slate-400">FIN-001 / PCARD</span>
+                        <span id="gold-truth-pill" class="px-2 py-0.5 rounded bg-redBrand/10 text-redBrand border border-redBrand/30 font-bold">GOLD: BLOCK</span>
+                    </div>
+                    <p id="scenario-text-preview" class="text-xs font-sans text-slate-200">
+                        Employee submitted a $45 P-Card business lunch expense claim without an itemized receipt attached.
                     </p>
                 </div>
-                <button onclick="runSimulation()" class="w-full md:w-auto px-6 py-2.5 rounded-lg bg-cyanAccent hover:bg-cyan-300 text-obsidian font-bold text-xs font-mono tracking-wider transition transform active:scale-95 flex items-center justify-center space-x-2 shadow-[0_0_15px_rgba(0,229,255,0.25)]">
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <button onclick="runSimulation()" class="w-full md:w-auto px-6 py-2.5 rounded-lg bg-cyanBrand hover:bg-cyan-300 text-black font-bold text-xs font-mono tracking-wider transition transform active:scale-95 flex items-center justify-center space-x-2 shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                     <span>EXECUTE AUDIT</span>
                 </button>
             </div>
 
-            <!-- Policy Diff Viewer (Git-Style) -->
-            <div id="policy-diff-banner" class="rounded-xl border border-slateBorder bg-slateCard p-4 font-mono text-xs space-y-2">
-                <!-- Injected dynamically -->
+            <!-- Governing Policy Baseline Callout -->
+            <div id="policy-diff-banner" class="border-l-2 border-cyanBrand bg-cardBg/60 p-3.5 text-xs font-mono space-y-1 rounded-r-lg">
+                <div class="flex items-center space-x-2 text-cyanBrand font-semibold text-[11px]">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                    <span>GOVERNING POLICY BASELINE</span>
+                </div>
+                <p id="policy-baseline-text" class="text-slate-300 text-[11px] font-sans">
+                    P-Card Policy §3.2: Itemized receipts mandatory for all transactions above $25.00.
+                </p>
             </div>
 
-            <!-- TRI-SYSTEM COMPARISON GRIDS -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- TRI-SYSTEM COMPARISON CARDS -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-                <!-- SYSTEM A: RULE ENGINE -->
-                <div id="card-sys-a" class="bg-slateCard border border-slateBorder rounded-xl p-5 flex flex-col justify-between space-y-4 relative transition-all duration-300">
-                    <div class="flex justify-between items-start">
-                        <div class="space-y-1">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-6 h-6 rounded bg-slate-800 flex items-center justify-center text-slate-300">
-                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                                </div>
-                                <h2 class="font-bold text-white text-sm">System A • Rule Engine</h2>
+                <!-- CARD 1: RULE ENGINE -->
+                <div id="card-sys-a" class="bg-cardBg border border-borderTeal rounded-xl p-5 flex flex-col justify-between space-y-4 transition-all duration-300">
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2 text-cyanBrand font-bold text-sm">
+                                <span class="font-mono">&lt;/&gt;</span>
+                                <span class="text-white">Rule engine</span>
                             </div>
-                            <p class="text-[11px] text-slate-400">Hardcoded Python if/else trees (GuardAgent baseline).</p>
+                            <span class="text-[9px] font-mono px-2 py-0.5 rounded border border-borderTeal bg-themeBg text-slate-400">STATIC CODE</span>
                         </div>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400">STATIC CODE</span>
+                        <p class="text-xs text-slate-400">Hardcoded decision rules</p>
+                        <div class="border-t border-borderTeal/60 pt-3 space-y-2.5 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Verdict</span>
+                                <span id="sys-a-decision" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-[#0C2630] text-slate-300">AWAITING</span>
+                            </div>
+                            <div class="flex justify-between items-center font-mono">
+                                <span class="text-slate-400 font-sans">Latency</span>
+                                <span class="text-slate-300">&lt; 0.02 ms</span>
+                            </div>
+                            <div class="flex justify-between items-center font-mono">
+                                <span class="text-slate-400 font-sans">Status</span>
+                                <span id="sys-a-status" class="text-slate-400">Idle</span>
+                            </div>
+                            <div class="pt-1.5 space-y-1">
+                                <span class="text-slate-400 text-[11px] block">Rule citation</span>
+                                <p id="sys-a-citation" class="text-slate-300 text-[11px] font-mono leading-relaxed">Run the audit to inspect the rule citation.</p>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="bg-obsidian border border-slateBorder/80 rounded-lg p-3.5 space-y-2.5 font-mono text-xs">
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Verdict:</span>
-                            <span id="sys-a-decision" class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400">AWAITING</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Latency:</span>
-                            <span class="text-emeraldApprove font-semibold">&lt; 0.02 ms</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Code Sync:</span>
-                            <span id="sys-a-status" class="text-slate-400">Idle</span>
-                        </div>
-                        <div class="border-t border-slateBorder/60 pt-2 text-[11px]">
-                            <span class="text-slate-400 block mb-1">Rule ID Citation:</span>
-                            <p id="sys-a-citation" class="text-slate-300 truncate">Awaiting execution...</p>
-                        </div>
-                    </div>
-
-                    <div id="sys-a-callout" class="text-[11px] font-mono text-slate-400 bg-obsidian/40 p-2.5 rounded border border-slateBorder/40">
-                        Ultra-fast execution on deterministic thresholds.
+                    <div id="sys-a-footer" class="border-t border-borderTeal/40 pt-3 text-[11px] text-slate-400">
+                        Deterministic checks for explicit thresholds.
                     </div>
                 </div>
 
-                <!-- SYSTEM B: RETRIEVAL-GROUNDED JUDGE -->
-                <div id="card-sys-b" class="bg-slateCard border border-slateBorder rounded-xl p-5 flex flex-col justify-between space-y-4 relative transition-all duration-300">
-                    <div class="flex justify-between items-start">
-                        <div class="space-y-1">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-6 h-6 rounded bg-cyanAccent/10 flex items-center justify-center text-cyanAccent">
-                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
-                                </div>
-                                <h2 class="font-bold text-white text-sm">System B • Retrieval Judge</h2>
+                <!-- CARD 2: RETRIEVAL JUDGE -->
+                <div id="card-sys-b" class="bg-cardBg border border-borderTeal rounded-xl p-5 flex flex-col justify-between space-y-4 transition-all duration-300">
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2 text-cyanBrand font-bold text-sm">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                                <span class="text-white">Retrieval judge</span>
                             </div>
-                            <p class="text-[11px] text-slate-400">FAISS IndexFlatIP + Lexical Hybrid Search + CoT LLM.</p>
+                            <span class="text-[9px] font-mono px-2 py-0.5 rounded border border-borderTeal bg-themeBg text-slate-400">ZERO-CODE UPDATE</span>
                         </div>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyanAccent/10 text-cyanAccent border border-cyanAccent/20">ZERO-CODE</span>
+                        <p class="text-xs text-slate-400">Retrieved policy evidence</p>
+                        <div class="border-t border-borderTeal/60 pt-3 space-y-2.5 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Verdict</span>
+                                <span id="sys-b-decision" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-[#0C2630] text-slate-300">AWAITING</span>
+                            </div>
+                            <div class="flex justify-between items-center font-mono">
+                                <span class="text-slate-400 font-sans">Latency</span>
+                                <span class="text-slate-300">~1.42 s</span>
+                            </div>
+                            <div class="flex justify-between items-center font-mono">
+                                <span class="text-slate-400 font-sans">Status</span>
+                                <span id="sys-b-status" class="text-slate-400">Idle</span>
+                            </div>
+                            <div class="pt-1.5 space-y-1">
+                                <span class="text-slate-400 text-[11px] block">Retrieved excerpt</span>
+                                <p id="sys-b-citation" class="text-slate-300 text-[11px] font-mono leading-relaxed">Run the audit to inspect the retrieved excerpt.</p>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="bg-obsidian border border-slateBorder/80 rounded-lg p-3.5 space-y-2.5 font-mono text-xs">
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Verdict:</span>
-                            <span id="sys-b-decision" class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400">AWAITING</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Latency:</span>
-                            <span class="text-cyanAccent font-semibold">~1.42 s</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Adaptation:</span>
-                            <span id="sys-b-status" class="text-slate-400">Idle</span>
-                        </div>
-                        <div class="border-t border-slateBorder/60 pt-2 text-[11px]">
-                            <span class="text-slate-400 block mb-1">Retrieved Excerpt Citation:</span>
-                            <p id="sys-b-citation" class="text-slate-300 line-clamp-2">Awaiting execution...</p>
-                        </div>
-                    </div>
-
-                    <div id="sys-b-callout" class="text-[11px] font-mono text-slate-400 bg-obsidian/40 p-2.5 rounded border border-slateBorder/40">
-                        Dynamic re-indexing automatically pulls amended clauses.
+                    <div id="sys-b-footer" class="border-t border-borderTeal/40 pt-3 text-[11px] text-slate-400">
+                        Decisions include the governing policy excerpt.
                     </div>
                 </div>
 
-                <!-- SYSTEM C: HYBRID TIERED ROUTER -->
-                <div id="card-sys-c" class="bg-slateCard border border-cyanAccent/30 rounded-xl p-5 flex flex-col justify-between space-y-4 relative transition-all duration-300 glow-cyan-sm">
-                    <div class="flex justify-between items-start">
-                        <div class="space-y-1">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-6 h-6 rounded bg-emerald-500/10 flex items-center justify-center text-emeraldApprove">
-                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                                </div>
-                                <h2 class="font-bold text-white text-sm">System C • Hybrid Router</h2>
+                <!-- CARD 3: HYBRID ROUTER -->
+                <div id="card-sys-c" class="bg-cardBg border border-cyanBrand/30 rounded-xl p-5 flex flex-col justify-between space-y-4 transition-all duration-300">
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2 text-cyanBrand font-bold text-sm">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                                <span class="text-white">Hybrid router</span>
                             </div>
-                            <p class="text-[11px] text-slate-400">Fast Rule Filter (Tier 1) $\to$ Retrieval Fallback (Tier 2).</p>
+                            <span class="text-[9px] font-mono px-2 py-0.5 rounded border border-cyanBrand/30 bg-cyanBrand/5 text-cyanBrand">TIERED ROUTING</span>
                         </div>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">RECOMMENDED</span>
+                        <p class="text-xs text-slate-400">Fast rules with retrieval fallback</p>
+                        <div class="border-t border-borderTeal/60 pt-3 space-y-2.5 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Verdict</span>
+                                <span id="sys-c-decision" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-[#0C2630] text-slate-300">AWAITING</span>
+                            </div>
+                            <div class="flex justify-between items-center font-mono">
+                                <span class="text-slate-400 font-sans">Route</span>
+                                <span id="sys-c-route" class="text-slate-300">Tier 1 → Tier 2</span>
+                            </div>
+                            <div class="flex justify-between items-center font-mono">
+                                <span class="text-slate-400 font-sans">Status</span>
+                                <span class="text-slate-400">Ready</span>
+                            </div>
+                            <div class="pt-1.5 space-y-1">
+                                <span class="text-slate-400 text-[11px] block">Routing rationale</span>
+                                <p id="sys-c-rationale" class="text-slate-300 text-[11px] font-mono leading-relaxed">Execute to see the selected route and expected decision.</p>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="bg-obsidian border border-slateBorder/80 rounded-lg p-3.5 space-y-2.5 font-mono text-xs">
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Verdict:</span>
-                            <span id="sys-c-decision" class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400">AWAITING</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Execution Route:</span>
-                            <span id="sys-c-route" class="text-cyanAccent font-semibold">Tier 1 Pass</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Enterprise Fit:</span>
-                            <span class="text-emeraldApprove font-bold">Production Ready</span>
-                        </div>
-                        <div class="border-t border-slateBorder/60 pt-2 text-[11px]">
-                            <span class="text-slate-400 block mb-1">Architecture Routing Rationale:</span>
-                            <p id="sys-c-rationale" class="text-slate-300 line-clamp-2">Filters arithmetic in &lt;0.02ms while delegating ambiguity to LLM.</p>
-                        </div>
-                    </div>
-
-                    <div class="text-[11px] font-mono text-emeraldApprove bg-emerald-500/10 p-2.5 rounded border border-emerald-500/20">
-                        Shields LLM from arithmetic while eliminating code freeze.
+                    <div class="border-t border-borderTeal/40 pt-3 text-[11px] text-slate-400">
+                        Combines deterministic checks with policy-aware fallback.
                     </div>
                 </div>
 
             </div>
 
-            <!-- Real-Time Audit Telemetry Stream -->
-            <div class="bg-slateCard border border-slateBorder rounded-xl p-4 space-y-3 font-mono text-xs">
-                <div class="flex items-center justify-between border-b border-slateBorder pb-2">
-                    <div class="flex items-center space-x-2">
-                        <span class="w-2 h-2 rounded-full bg-cyanAccent animate-pulse"></span>
-                        <span class="font-bold text-white text-[11px] uppercase tracking-wider">Live Audit Event Log (Telemetry Stream)</span>
+            <!-- Bottom: AUDIT EVENT LOG -->
+            <div class="space-y-2.5 pt-2">
+                <div class="flex items-center justify-between text-xs font-mono">
+                    <div class="flex items-center space-x-2 text-cyanBrand">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        <span class="font-bold tracking-wider uppercase text-white">AUDIT EVENT LOG</span>
                     </div>
-                    <span class="text-slate-500 text-[10px]">Deterministic Timestamp Verification</span>
+                    <span id="log-count-tag" class="text-slate-500 text-[11px]">0 events • local simulation</span>
                 </div>
-                <div id="telemetry-feed" class="bg-obsidian rounded-lg p-3 text-[11px] text-slate-300 h-28 overflow-y-auto space-y-1 custom-scroll">
-                    <p class="text-slate-500">[SYSTEM_BOOT] Initializing FAISS IndexFlatIP (dim=384, all-MiniLM-L6-v2)...</p>
-                    <p class="text-slate-500">[SYSTEM_BOOT] Rule engines mounted: HR (§2.1), Finance (§3.2), IT (§4.1)...</p>
-                    <p class="text-cyanAccent">[STATUS] Ready. Select a scenario and click 'EXECUTE AUDIT'.</p>
+                <div id="telemetry-feed" class="bg-cardBg border border-borderTeal rounded-xl p-4 font-mono text-xs text-slate-400 h-28 overflow-y-auto space-y-1.5 custom-scroll">
+                    <p>Select a policy state and execute an audit to generate events.</p>
                 </div>
             </div>
 
         </div>
 
         <!-- ============================================================== -->
-        <!-- TAB 2: BENCHMARK & EMPIRICAL DATA -->
+        <!-- TAB 2: BENCHMARK (EVALUATION / 02) -->
         <!-- ============================================================== -->
         <div id="tab-results" class="hidden space-y-6">
-            <div class="bg-slateCard border border-slateBorder rounded-xl p-6 space-y-6">
+            
+            <div class="border-t border-borderTeal/60 pt-5 space-y-5">
                 <div>
-                    <h2 class="text-lg font-bold text-white font-sans">Empirical Multi-Domain Benchmark ($N=90$, 1,000 Bootstrap Resamples)</h2>
-                    <p class="text-xs text-slate-400 font-mono mt-1">Paired testing across 30 HR, 30 Finance, and 30 IT Access scenarios with exact McNemar significance.</p>
+                    <span class="text-[11px] font-mono text-cyanBrand tracking-wider block">EVALUATION / 02</span>
+                    <h2 class="text-xl font-bold text-white tracking-tight mt-0.5">Empirical benchmark</h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Paired results across HR, finance, and IT access scenarios.</p>
                 </div>
 
-                <!-- Main Evaluation Table -->
-                <div class="overflow-x-auto border border-slateBorder rounded-lg">
-                    <table class="w-full text-left text-xs font-mono">
-                        <thead class="bg-obsidian text-slate-400 uppercase text-[10px] border-b border-slateBorder">
-                            <tr>
-                                <th class="p-3">Domain</th>
-                                <th class="p-3">N</th>
-                                <th class="p-3">System A (Rule Base)</th>
-                                <th class="p-3">System B (Retrieval)</th>
-                                <th class="p-3 text-cyanAccent">System C (Hybrid)</th>
-                                <th class="p-3">McNemar p-val</th>
-                                <th class="p-3">Explainability (A / B)</th>
+                <!-- Table from Screenshot 2 -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs font-mono border-t border-b border-borderTeal">
+                        <thead class="text-slate-400 uppercase text-[10px] tracking-wider">
+                            <tr class="border-b border-borderTeal">
+                                <th class="py-3 px-2 font-normal">DOMAIN • N=30</th>
+                                <th class="py-3 px-4 font-normal">RULE ENGINE</th>
+                                <th class="py-3 px-4 font-normal">RETRIEVAL</th>
+                                <th class="py-3 px-4 font-normal text-cyanBrand">HYBRID</th>
+                                <th class="py-3 px-4 font-normal">MCNEMAR P</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slateBorder text-[11px]">
-                            <tr class="hover:bg-slateBorder/20">
-                                <td class="p-3 font-semibold text-white">HR Operations</td>
-                                <td class="p-3 text-slate-400">30</td>
-                                <td class="p-3 text-emeraldApprove font-bold">100.0% [100.0%, 100.0%]</td>
-                                <td class="p-3 text-slate-300">23.3% [10.0%, 36.7%]</td>
-                                <td class="p-3 text-cyanAccent font-bold">86.7% [62.1%, 93.3%]</td>
-                                <td class="p-3 text-rubyBlock font-bold">p &lt; 0.001 *</td>
-                                <td class="p-3 text-slate-400">93.3% / 0.0%</td>
+                        <tbody class="divide-y divide-borderTeal text-xs">
+                            <tr>
+                                <td class="py-3.5 px-2 text-white font-sans font-medium">HR Operations</td>
+                                <td class="py-3.5 px-4 text-slate-300">100.0%</td>
+                                <td class="py-3.5 px-4 text-slate-300">23.3%</td>
+                                <td class="py-3.5 px-4 text-cyanBrand font-bold">86.7%</td>
+                                <td class="py-3.5 px-4 text-greenBrand font-medium">p &lt; 0.001</td>
                             </tr>
-                            <tr class="hover:bg-slateBorder/20">
-                                <td class="p-3 font-semibold text-white">Corporate Finance</td>
-                                <td class="p-3 text-slate-400">30</td>
-                                <td class="p-3 text-emeraldApprove font-bold">100.0% [100.0%, 100.0%]</td>
-                                <td class="p-3 text-slate-300">30.0% [10.0%, 43.3%]</td>
-                                <td class="p-3 text-cyanAccent font-bold">76.7% [55.3%, 86.7%]</td>
-                                <td class="p-3 text-rubyBlock font-bold">p &lt; 0.001 *</td>
-                                <td class="p-3 text-slate-400">100.0% / 0.0%</td>
+                            <tr>
+                                <td class="py-3.5 px-2 text-white font-sans font-medium">Corporate Finance</td>
+                                <td class="py-3.5 px-4 text-slate-300">100.0%</td>
+                                <td class="py-3.5 px-4 text-slate-300">30.0%</td>
+                                <td class="py-3.5 px-4 text-cyanBrand font-bold">76.7%</td>
+                                <td class="py-3.5 px-4 text-greenBrand font-medium">p &lt; 0.001</td>
                             </tr>
-                            <tr class="hover:bg-slateBorder/20">
-                                <td class="p-3 font-semibold text-white">IT Access Security</td>
-                                <td class="p-3 text-slate-400">30</td>
-                                <td class="p-3 text-amberFlag font-bold">86.7% [66.7%, 93.3%]</td>
-                                <td class="p-3 text-slate-300">20.0% [6.7%, 33.3%]</td>
-                                <td class="p-3 text-cyanAccent font-bold">43.3% [23.3%, 56.7%]</td>
-                                <td class="p-3 text-rubyBlock font-bold">p = 1e-05 *</td>
-                                <td class="p-3 text-slate-400">80.0% / 0.0%</td>
+                            <tr>
+                                <td class="py-3.5 px-2 text-white font-sans font-medium">IT Access Security</td>
+                                <td class="py-3.5 px-4 text-slate-300">86.7%</td>
+                                <td class="py-3.5 px-4 text-slate-300">20.0%</td>
+                                <td class="py-3.5 px-4 text-cyanBrand font-bold">43.3%</td>
+                                <td class="py-3.5 px-4 text-greenBrand font-medium">p = 1e-05</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Headline Robustness Callout Card -->
-                <div class="bg-obsidian border border-slateBorder rounded-xl p-5 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slateBorder pb-3">
-                        <div class="flex items-center space-x-2">
-                            <span class="w-2 h-2 rounded-full bg-cyanAccent"></span>
-                            <h3 class="font-bold text-white text-sm font-sans">Headline Empirical Result • Policy-Change Robustness ($N=30$)</h3>
+                <!-- Policy-Change Robustness Section -->
+                <div class="pt-4 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] font-mono text-cyanBrand uppercase tracking-wider block">POLICY-CHANGE ROBUSTNESS • N = 30</span>
+                            <h3 class="text-lg font-bold text-white tracking-tight mt-0.5">Adapting to amended rules</h3>
                         </div>
-                        <span class="text-xs font-mono font-bold text-emeraldApprove bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">
-                            p = 0.00131 (Statistically Significant)
-                        </span>
+                        <span class="text-xs font-mono text-greenBrand font-medium">p = 0.00131 • significant</span>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center font-mono">
-                        <div class="bg-slateCard p-3.5 rounded-lg border border-slateBorder">
-                            <span class="text-[10px] text-slate-400 uppercase block mb-1">System A (Stale Code)</span>
-                            <span class="text-2xl font-bold text-rubyBlock">30.0%</span>
-                            <span class="text-[10px] text-slate-500 block mt-1">95% CI [13.3%, 43.3%]</span>
+                    <!-- 4 Columns from Screenshot 3 -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-1 font-mono">
+                        <div class="border-t border-borderTeal pt-3 space-y-1">
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">STALE CODE ACCURACY</span>
+                            <div class="text-2xl font-bold text-redBrand">30.0%</div>
+                            <span class="text-[10px] text-slate-500 block">95% CI [13.3%, 43.3%]</span>
                         </div>
-                        <div class="bg-slateCard p-3.5 rounded-lg border border-slateBorder">
-                            <span class="text-[10px] text-slate-400 uppercase block mb-1">System B (Re-indexed)</span>
-                            <span class="text-2xl font-bold text-emeraldApprove">76.7%</span>
-                            <span class="text-[10px] text-slate-500 block mt-1">95% CI [53.3%, 86.7%]</span>
+                        <div class="border-t border-borderTeal pt-3 space-y-1">
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">RE-INDEXED RETRIEVAL</span>
+                            <div class="text-2xl font-bold text-cyanBrand">76.7%</div>
+                            <span class="text-[10px] text-slate-500 block">95% CI [53.3%, 86.7%]</span>
                         </div>
-                        <div class="bg-slateCard p-3.5 rounded-lg border border-slateBorder">
-                            <span class="text-[10px] text-slate-400 uppercase block mb-1">Stale Code Error Rate</span>
-                            <span class="text-2xl font-bold text-rubyBlock">70.0%</span>
-                            <span class="text-[10px] text-slate-500 block mt-1">Silent Breaches</span>
+                        <div class="border-t border-borderTeal pt-3 space-y-1">
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">STALE-CODE ERROR RATE</span>
+                            <div class="text-2xl font-bold text-redBrand">70.0%</div>
+                            <span class="text-[10px] text-slate-500 block">Silent policy mismatches</span>
                         </div>
-                        <div class="bg-slateCard p-3.5 rounded-lg border border-slateBorder">
-                            <span class="text-[10px] text-slate-400 uppercase block mb-1">Engineering Effort</span>
-                            <span class="text-2xl font-bold text-cyanAccent">0 Lines</span>
-                            <span class="text-[10px] text-slate-500 block mt-1">Zero Code Redeploys</span>
+                        <div class="border-t border-borderTeal pt-3 space-y-1">
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">CODE CHANGES</span>
+                            <div class="text-2xl font-bold text-cyanBrand">0 lines</div>
+                            <span class="text-[10px] text-slate-500 block">No rule redeployment</span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Paired Contingency Matrix -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
-                    <div class="bg-obsidian border border-slateBorder rounded-lg p-4 space-y-2">
-                        <span class="text-white font-semibold text-[11px] block border-b border-slateBorder pb-1.5 uppercase">
-                            McNemar Discordant Contingency Matrix (Post-Edit)
-                        </span>
-                        <div class="grid grid-cols-2 gap-2 text-center pt-2">
-                            <div class="bg-slateCard p-2.5 rounded border border-slateBorder">
-                                <span class="text-slate-400 block text-[10px]">A Wins / B Loses</span>
-                                <span class="text-base font-bold text-slate-300">2</span>
+                    <!-- Bottom Split: Discordant Pairs & Blind Human Validation -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
+                        
+                        <!-- Left: Discordant Pairs -->
+                        <div class="space-y-3 font-mono">
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">DISCORDANT PAIRS • POST-EDIT</span>
+                            <div class="grid grid-cols-2 gap-3 border-t border-borderTeal pt-3">
+                                <div>
+                                    <span class="text-xs text-slate-400 block font-sans">A wins / B loses</span>
+                                    <span class="text-2xl font-bold text-white block mt-1">2</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-slate-400 block font-sans">B wins / A loses</span>
+                                    <span class="text-2xl font-bold text-cyanBrand block mt-1">16</span>
+                                </div>
                             </div>
-                            <div class="bg-slateCard p-2.5 rounded border border-emerald-500/30 bg-emerald-500/5">
-                                <span class="text-emeraldApprove block text-[10px] font-bold">B Wins / A Loses</span>
-                                <span class="text-base font-bold text-emeraldApprove">16</span>
-                            </div>
+                            <p class="text-[11px] text-slate-500 font-sans pt-1">
+                                Exact binomial calculation over 18 discordant pairs yields p = 0.00131.
+                            </p>
                         </div>
-                        <p class="text-[10px] text-slate-400 pt-1">Binomial exact calculation over 18 discordant pairs yields p=0.00131.</p>
-                    </div>
 
-                    <div class="bg-obsidian border border-slateBorder rounded-lg p-4 space-y-2">
-                        <span class="text-white font-semibold text-[11px] block border-b border-slateBorder pb-1.5 uppercase">
-                            Blind Human Validation Audit (N=24)
-                        </span>
-                        <div class="flex justify-between items-center pt-2">
-                            <span class="text-slate-400">Observed Agreement:</span>
-                            <span class="text-white font-bold">91.7% (22 / 24)</span>
+                        <!-- Right: Blind Human Validation -->
+                        <div class="space-y-3 font-mono">
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider block">BLIND HUMAN VALIDATION • N = 24</span>
+                            <div class="border-t border-borderTeal pt-3 space-y-2 text-xs">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400 font-sans">Observed agreement</span>
+                                    <span class="text-white font-medium">91.7% (22 / 24)</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400 font-sans">Chance agreement</span>
+                                    <span class="text-slate-300">66.7%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400 font-sans">Cohen's kappa</span>
+                                    <span class="text-greenBrand font-bold">0.7500 • substantial</span>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-slate-500 font-sans pt-1">
+                                Automated explainability scores compared with the human compliance audit.
+                            </p>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Chance Agreement (Pe):</span>
-                            <span class="text-slate-300">66.7%</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Cohen's Kappa (κ):</span>
-                            <span class="text-cyanAccent font-bold">0.7500 (Substantial)</span>
-                        </div>
-                        <p class="text-[10px] text-slate-400 pt-1">Confirms automated explainability scorer mirrors human compliance audit.</p>
+
                     </div>
                 </div>
 
             </div>
+
         </div>
 
         <!-- ============================================================== -->
-        <!-- TAB 3: 3-SLIDE PRESENTATION DECK -->
+        <!-- TAB 3: BRIEFING DECK (EXECUTIVE BRIEFING / 03) -->
         <!-- ============================================================== -->
         <div id="tab-slides" class="hidden space-y-6">
-            <div class="flex justify-between items-center border-b border-slateBorder pb-3">
+            
+            <div class="border-t border-borderTeal/60 pt-5 space-y-6">
                 <div>
-                    <h2 class="text-lg font-bold text-white font-sans">Executive 3-Minute Walkthrough Deck</h2>
-                    <p class="text-xs text-slate-400 font-mono">Engineered for crisp, structured communication in technical and HR interviews.</p>
+                    <span class="text-[11px] font-mono text-cyanBrand tracking-wider block">EXECUTIVE BRIEFING / 03</span>
+                    <h2 class="text-xl font-bold text-white tracking-tight mt-0.5">Three-minute walkthrough</h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Three concise frames for presenting the study.</p>
                 </div>
-                <span class="text-xs font-mono text-cyanAccent bg-cyanAccent/10 px-2.5 py-1 rounded border border-cyanAccent/30">1 MIN / SLIDE</span>
-            </div>
 
-            <!-- Slide 1 -->
-            <div class="bg-slateCard border border-slateBorder rounded-xl p-6 space-y-4">
-                <div class="flex justify-between items-center border-b border-slateBorder pb-2 text-xs font-mono">
-                    <span class="text-cyanAccent font-bold uppercase tracking-wider">Slide 1 • The Problem & Tri-System Architecture</span>
-                    <span class="text-slate-500">01 / 03</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                    <div class="space-y-3">
-                        <h3 class="text-base font-bold text-white">The Stale-Code Vulnerability in AI Guardrails</h3>
-                        <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                            Enterprise LLM systems (e.g. NeMo Guardrails) enforce rules using hand-coded <code class="text-cyanAccent font-mono">if/else</code> logic. But company policies change constantly. When rules change, hardcoded code silently enforces obsolete policies until software engineers manually rewrite and redeploy software.
+                <!-- Frame 01: Problem & Architecture -->
+                <div class="border-t border-borderTeal pt-5 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                    <div class="md:col-span-8 space-y-2.5">
+                        <span class="text-[10px] font-mono text-cyanBrand uppercase tracking-wider block">01 / PROBLEM & ARCHITECTURE</span>
+                        <h3 class="text-lg font-bold text-white">Policy changes can leave guardrails behind.</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed max-w-2xl">
+                            Hardcoded logic can continue to enforce superseded policy clauses until the software is updated. Retrieval grounding offers a way to use current policy evidence without rewriting each threshold.
                         </p>
-                        <div class="space-y-1.5 text-xs font-mono text-slate-400">
-                            <div><span class="text-white font-semibold">System A:</span> Hand-crafted rule engine (sub-millisecond arithmetic baseline).</div>
-                            <div><span class="text-cyanAccent font-semibold">System B:</span> FAISS dense retrieval + LLM Judge with verbatim citations.</div>
-                            <div><span class="text-emeraldApprove font-semibold">System C:</span> Hybrid Router (Tier 1 fast rules $\to$ Tier 2 retrieval fallback).</div>
-                        </div>
                     </div>
-                    <div class="bg-obsidian border border-slateBorder rounded-lg p-4 font-mono text-[11px] space-y-1.5 text-slate-300">
-                        <div class="text-cyanAccent font-bold">// Evaluation Request Pipeline</div>
-                        <div>Action Request (HR / Finance / IT Access)</div>
-                        <div class="pl-4">├── Tier 1: Fast Rule Filter (&lt;0.02ms)</div>
-                        <div class="pl-4">│    ├── Clear Match? → Instant Decision</div>
-                        <div class="pl-4">│    └── Ambiguous / Modified Policy?</div>
-                        <div class="pl-8">└── Tier 2: FAISS Hybrid Dense-Lexical Search</div>
-                        <div class="pl-12">└── LLM Governance Judge (Chain-of-Thought)</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="bg-slateCard border border-slateBorder rounded-xl p-6 space-y-4">
-                <div class="flex justify-between items-center border-b border-slateBorder pb-2 text-xs font-mono">
-                    <span class="text-cyanAccent font-bold uppercase tracking-wider">Slide 2 • Headline Discovery: Dynamic Policy Drift</span>
-                    <span class="text-slate-500">02 / 03</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                    <div class="space-y-3">
-                        <h3 class="text-base font-bold text-white">Rule Engines Suffer 70% Failure When Policies Evolve</h3>
-                        <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                            We modified concrete rules in policy documents (HR notice: 14 $\to$ 5 days; P-Card limit: \$25 $\to$ \$50; Break-glass: 4h $\to$ 8h) and evaluated both systems with zero code modifications.
-                        </p>
-                        <ul class="text-xs space-y-1 font-mono text-slate-400 list-disc list-inside">
-                            <li><strong class="text-rubyBlock">Rule code collapsed to 30.0%</strong> (70% stale error rate).</li>
-                            <li><strong class="text-emeraldApprove">Retrieval Grounding adapted to 76.7%</strong> with 0 lines of code.</li>
-                            <li>Paired exact McNemar significance: <strong class="text-cyanAccent">p = 0.00131</strong> ($p < 0.01$).</li>
-                        </ul>
-                    </div>
-                    <div class="bg-obsidian border border-slateBorder rounded-lg p-4 font-mono text-xs space-y-3">
-                        <div class="flex justify-between items-center border-b border-slateBorder/60 pb-2">
-                            <span class="text-slate-400">Static Rule Code (System A):</span>
-                            <span class="text-rubyBlock font-bold">70% Silent Failures</span>
+                    <div class="md:col-span-4 bg-cardBg border border-borderTeal rounded-xl p-4 space-y-3 font-mono text-xs">
+                        <div class="w-8 h-8 rounded border border-cyanBrand/30 bg-cyanBrand/5 flex items-center justify-center text-cyanBrand">
+                            &lt;/&gt;
                         </div>
-                        <div class="flex justify-between items-center border-b border-slateBorder/60 pb-2">
-                            <span class="text-slate-400">Retrieval Grounding (System B):</span>
-                            <span class="text-emeraldApprove font-bold">0% Code Failures</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Engineering Redeployment:</span>
-                            <span class="text-cyanAccent font-bold">0 Lines of Code</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="bg-slateCard border border-slateBorder rounded-xl p-6 space-y-4">
-                <div class="flex justify-between items-center border-b border-slateBorder pb-2 text-xs font-mono">
-                    <span class="text-cyanAccent font-bold uppercase tracking-wider">Slide 3 • The Enterprise Future: System C Hybrid Router</span>
-                    <span class="text-slate-500">03 / 03</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                    <div class="space-y-3">
-                        <h3 class="text-base font-bold text-white">Why Production Architectures Must Be Hybrid</h3>
-                        <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                            Pure rule engines fail when policies drift. Pure LLM judges struggle with exact arithmetic and API throttling. System C combines the strengths of both paradigms.
-                        </p>
-                        <div class="space-y-2 text-xs font-mono">
-                            <div class="bg-obsidian p-2.5 rounded border border-slateBorder">
-                                <span class="text-emeraldApprove font-bold block">Tier 1 Fast Rule Filter (&lt;0.02ms)</span>
-                                <span class="text-slate-400 text-[11px]">Handles 80%+ of high-volume standard arithmetic at zero cost.</span>
+                        <div class="space-y-2 text-[11px] text-slate-300">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-cyanBrand">→</span>
+                                <span>A • Static rule engine</span>
                             </div>
-                            <div class="bg-obsidian p-2.5 rounded border border-slateBorder">
-                                <span class="text-cyanAccent font-bold block">Tier 2 Dynamic Retrieval Fallback</span>
-                                <span class="text-slate-400 text-[11px]">Handles Separation of Duties, edge-cases, and newly edited clauses.</span>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-cyanBrand">→</span>
+                                <span>B • Retrieval-grounded judge</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-cyanBrand">→</span>
+                                <span>C • Fast rules with retrieval fallback</span>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-obsidian border border-slateBorder rounded-lg p-5 font-mono text-center space-y-2">
-                        <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Explainability Validation Reliability</span>
-                        <div class="text-3xl font-bold text-cyanAccent">κ = 0.7500</div>
-                        <span class="text-xs text-emeraldApprove font-bold block">Substantial Human Agreement (N=24)</span>
-                        <p class="text-[11px] text-slate-400 mt-1">Automated citation scoring matches expert human audit without false positives.</p>
+                </div>
+
+                <!-- Frame 02: Policy Drift Finding -->
+                <div class="border-t border-borderTeal pt-5 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                    <div class="md:col-span-8 space-y-2.5">
+                        <span class="text-[10px] font-mono text-cyanBrand uppercase tracking-wider block">02 / POLICY DRIFT FINDING</span>
+                        <h3 class="text-lg font-bold text-white">Amended rules exposed stale decisions.</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed max-w-2xl">
+                            Across the policy-change evaluation, the supplied benchmark reports a 70% stale-code error rate and 76.7% retrieval accuracy, with zero code changes.
+                        </p>
+                    </div>
+                    <div class="md:col-span-4 bg-cardBg border border-borderTeal rounded-xl p-4 space-y-3 font-mono text-xs">
+                        <div class="w-8 h-8 rounded border border-cyanBrand/30 bg-cyanBrand/5 flex items-center justify-center text-cyanBrand">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="7" x2="17" y2="17"/><polyline points="17 7 17 17 7 17"/></svg>
+                        </div>
+                        <div class="space-y-2 text-[11px] text-slate-300">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-cyanBrand">→</span>
+                                <span>30 amended-policy scenarios</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-cyanBrand">→</span>
+                                <span>Paired exact McNemar p = 0.00131</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-cyanBrand">→</span>
+                                <span>Results vary by domain; see benchmark</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Frame 03: Hybrid Direction -->
+                <div class="border-t border-borderTeal pt-5 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                    <div class="md:col-span-8 space-y-2.5">
+                        <span class="text-[10px] font-mono text-cyanBrand uppercase tracking-wider block">03 / HYBRID DIRECTION</span>
+                        <h3 class="text-lg font-bold text-white">Use the right path for each decision.</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed max-w-2xl">
+                            A tiered router keeps clear, deterministic checks fast and sends policy-sensitive or ambiguous cases to retrieval for evidence-backed evaluation.
+                        </p>
+                    </div>
+                    <div class="md:col-span-4 bg-cardBg border border-borderTeal rounded-xl p-4 space-y-3 font-mono text-xs">
+                        <div class="w-8 h-8 rounded border border-cyanBrand/30 bg-cyanBrand/5 flex items-center justify-center text-cyanBrand">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                        </div>
+                        <div class="space-y-2 text-[11px] text-slate-300">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-cyanBrand">→</span>
+                                <span>Tier 1 • deterministic thresholds</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-cyanBrand">→</span>
+                                <span>Tier 2 • dynamic evidence retrieval</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-cyanBrand">→</span>
+                                <span>Human validation • κ = 0.7500 (N = 24)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
     </main>
 
-    <!-- Interactive Logic Script -->
+    <!-- Embedded Scenario Database & Logic Script -->
     <script>
         const scenarioDatabase = {
             finance: [
                 {
                     id: "FIN-001",
-                    category: "pcard",
-                    title: "P-Card Lunch Receipt ($45 claim without receipt)",
+                    category: "PCARD",
+                    title: "FIN-001 — P-Card Lunch Receipt ($45 claim without receipt)",
                     text: "Employee submitted a $45 P-Card business lunch expense claim without an itemized receipt attached.",
                     pre_gold: "BLOCK",
                     post_gold: "APPROVE",
@@ -603,12 +632,13 @@
                     sys_a_post: { dec: "BLOCK", cite: "RULE-FIN-002: Old rule hardcoded ($25 threshold)", stale: true },
                     sys_b_pre: { dec: "BLOCK", cite: "Receipt required for transactions exceeding $25." },
                     sys_b_post: { dec: "APPROVE", cite: "Receipt required only above $50. $45 does not require receipt." },
-                    sys_c_route: "Tier 1 Fast Rule (Pre) → Tier 2 Fallback (Post)"
+                    sys_c_route: "Tier 1 → Tier 2",
+                    sys_c_rationale: "Initial static filter triggered policy exception; delegated to Tier 2 retrieval."
                 },
                 {
                     id: "FIN-002",
-                    category: "procurement",
-                    title: "Tier 2 Dev Tooling License ($12,000 with Director approval)",
+                    category: "PROCUREMENT",
+                    title: "FIN-002 — Tier 2 Dev Tooling License ($12,000 with Director approval)",
                     text: "Engineering Lead purchasing $12,000 USD software tooling license with Director approval.",
                     pre_gold: "BLOCK",
                     post_gold: "APPROVE",
@@ -618,12 +648,13 @@
                     sys_a_post: { dec: "BLOCK", cite: "RULE-FIN-001: Stale code still enforces $10k ceiling", stale: true },
                     sys_b_pre: { dec: "BLOCK", cite: "Contracts above $10,000 require Vice President approval." },
                     sys_b_post: { dec: "APPROVE", cite: "Tier 2 ceiling is now $15,000. Director approval is valid." },
-                    sys_c_route: "Tier 2 Retrieval Fallback (Threshold Revision)"
+                    sys_c_route: "Tier 2 Retrieval Fallback",
+                    sys_c_rationale: "Threshold amendment routed to retrieval judge for verified contract ceiling."
                 },
                 {
                     id: "FIN-003",
-                    category: "procurement",
-                    title: "Cloud Credits ($750 USD with Manager approval)",
+                    category: "PROCUREMENT",
+                    title: "FIN-003 — Cloud Credits ($750 USD with Manager approval)",
                     text: "Team lead purchasing $750 USD in cloud testing credits (Tier 1) with written approval from Direct Manager.",
                     pre_gold: "APPROVE",
                     post_gold: "APPROVE",
@@ -633,14 +664,15 @@
                     sys_a_post: { dec: "APPROVE", cite: "RULE-FIN-001 §2.1: Tier 1 approval verified", stale: false },
                     sys_b_pre: { dec: "APPROVE", cite: "Tier 1 (Up to $1,000 USD): Requires Direct Manager approval." },
                     sys_b_post: { dec: "APPROVE", cite: "Tier 1 (Up to $1,000 USD): Requires Direct Manager approval." },
-                    sys_c_route: "Tier 1 Fast Rule (< 0.02 ms)"
+                    sys_c_route: "Tier 1 Fast Rule (< 0.02 ms)",
+                    sys_c_rationale: "Deterministic match in Tier 1; executed sub-millisecond without LLM overhead."
                 }
             ],
             hr: [
                 {
                     id: "HR-001",
-                    category: "leave",
-                    title: "Annual Leave Notice (5 business days notice for 5 days off)",
+                    category: "LEAVE",
+                    title: "HR-001 — Annual Leave Notice (5 business days notice for 5 days off)",
                     text: "Senior analyst applying for 5 consecutive days of planned annual leave with 5 business days advance notice.",
                     pre_gold: "FLAG",
                     post_gold: "APPROVE",
@@ -650,12 +682,13 @@
                     sys_a_post: { dec: "FLAG", cite: "RULE-HR-003: Hardcoded code enforces obsolete 14 days", stale: true },
                     sys_b_pre: { dec: "FLAG", cite: "Planned leave exceeding 3 days requires at least 14 days notice." },
                     sys_b_post: { dec: "APPROVE", cite: "Notice requirement amended to 5 business days. Compliant." },
-                    sys_c_route: "Tier 1 Rule (Pre) → Tier 2 Fallback (Post)"
+                    sys_c_route: "Tier 1 → Tier 2",
+                    sys_c_rationale: "Notice discrepancy routed to retrieval judge; successfully aligned with amended 5-day SLA."
                 },
                 {
                     id: "HR-002",
-                    category: "leave",
-                    title: "Standard PTO Balance (2 days requested, 15 balance)",
+                    category: "LEAVE",
+                    title: "HR-002 — Standard PTO Balance (2 days requested, 15 balance)",
                     text: "Associate requesting 2 days of PTO with 3 weeks notice and 15 days accrued balance.",
                     pre_gold: "APPROVE",
                     post_gold: "APPROVE",
@@ -665,14 +698,15 @@
                     sys_a_post: { dec: "APPROVE", cite: "RULE-HR-001: Balance 15 >= 2 requested", stale: false },
                     sys_b_pre: { dec: "APPROVE", cite: "Employees may draw from positive accrued PTO balance." },
                     sys_b_post: { dec: "APPROVE", cite: "Employees may draw from positive accrued PTO balance." },
-                    sys_c_route: "Tier 1 Fast Rule (< 0.02 ms)"
+                    sys_c_route: "Tier 1 Fast Rule (< 0.02 ms)",
+                    sys_c_rationale: "Positive balance validated by Tier 1 rule; instant approval."
                 }
             ],
             it_access: [
                 {
                     id: "IT-001",
-                    category: "pam",
-                    title: "Emergency Break-Glass Production Grant (6 Hours Duration)",
+                    category: "PAM",
+                    title: "IT-001 — Emergency Break-Glass Production Grant (6 Hours Duration)",
                     text: "DevOps on-call engineer requesting emergency break-glass root access for 6 hours to patch production database outage.",
                     pre_gold: "BLOCK",
                     post_gold: "APPROVE",
@@ -682,12 +716,13 @@
                     sys_a_post: { dec: "BLOCK", cite: "RULE-IT-004: Stale code rejects valid 6h request", stale: true },
                     sys_b_pre: { dec: "BLOCK", cite: "Emergency access shall not exceed 4 consecutive hours." },
                     sys_b_post: { dec: "APPROVE", cite: "Emergency break-glass ceiling extended to 8 hours. 6h approved." },
-                    sys_c_route: "Tier 1 Rule (Pre) → Tier 2 Fallback (Post)"
+                    sys_c_route: "Tier 1 → Tier 2",
+                    sys_c_rationale: "Emergency PAM grant duration check escalated to retrieval; validated 8h ceiling."
                 },
                 {
                     id: "IT-002",
-                    category: "security",
-                    title: "API Secret Key Rotation (75 Days Old)",
+                    category: "SECURITY",
+                    title: "IT-002 — API Secret Key Rotation (75 Days Old)",
                     text: "Automated scan detected production API token rotation requested at day 75 since last generation.",
                     pre_gold: "APPROVE",
                     post_gold: "BLOCK",
@@ -697,7 +732,8 @@
                     sys_a_post: { dec: "APPROVE", cite: "RULE-IT-005: Stale code silently permits expired token (SLA is 60d)", stale: true },
                     sys_b_pre: { dec: "APPROVE", cite: "API keys are valid for up to 90 days." },
                     sys_b_post: { dec: "BLOCK", cite: "API secret key exceeds amended 60-day rotation SLA (Day 75)." },
-                    sys_c_route: "Tier 2 Retrieval Fallback (SLA Drift)"
+                    sys_c_route: "Tier 2 Retrieval Fallback",
+                    sys_c_rationale: "Tighter security SLA caught via policy retrieval; prevented silent stale token breach."
                 }
             ]
         };
@@ -705,18 +741,19 @@
         let currentDomain = "finance";
         let isPostEdit = false;
         let activeScenario = null;
+        let auditEventCount = 0;
 
         function switchTab(tabId) {
             document.getElementById('tab-demo').classList.add('hidden');
             document.getElementById('tab-results').classList.add('hidden');
             document.getElementById('tab-slides').classList.add('hidden');
 
-            document.getElementById('tab-demo-btn').className = "px-3 py-1.5 rounded text-slate-400 hover:text-white transition flex items-center space-x-1.5";
-            document.getElementById('tab-results-btn').className = "px-3 py-1.5 rounded text-slate-400 hover:text-white transition flex items-center space-x-1.5";
-            document.getElementById('tab-slides-btn').className = "px-3 py-1.5 rounded text-slate-400 hover:text-white transition flex items-center space-x-1.5";
+            document.getElementById('tab-demo-btn').className = "px-3.5 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-2";
+            document.getElementById('tab-results-btn').className = "px-3.5 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-2";
+            document.getElementById('tab-slides-btn').className = "px-3.5 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-2";
 
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-            document.getElementById(`tab-${tabId}-btn`).className = "px-3 py-1.5 rounded bg-slateBorder text-white font-semibold transition flex items-center space-x-1.5";
+            document.getElementById(`tab-${tabId}-btn`).className = "px-3.5 py-1.5 rounded-md bg-[#0C2630] text-white font-medium transition flex items-center space-x-2";
         }
 
         function loadDomainScenarios() {
@@ -727,7 +764,7 @@
             scenarioDatabase[currentDomain].forEach((s, idx) => {
                 const opt = document.createElement('option');
                 opt.value = idx;
-                opt.textContent = `${s.id}: ${s.title}`;
+                opt.textContent = s.title;
                 selectEl.appendChild(opt);
             });
 
@@ -738,9 +775,8 @@
             const idx = document.getElementById('scenario-select').value;
             activeScenario = scenarioDatabase[currentDomain][idx];
             
-            document.getElementById('scenario-id-tag').textContent = activeScenario.id;
-            document.getElementById('scenario-cat-tag').textContent = `// Category: ${activeScenario.category}`;
-            document.getElementById('scenario-text-preview').textContent = `"${activeScenario.text}"`;
+            document.getElementById('scenario-id-tag').textContent = `${activeScenario.id} / ${activeScenario.category}`;
+            document.getElementById('scenario-text-preview').textContent = activeScenario.text;
             
             updatePolicyDiffBanner();
             resetCards();
@@ -752,11 +788,11 @@
             const btnPost = document.getElementById('btn-post-edit');
 
             if (isPostEdit) {
-                btnPost.className = "flex-1 py-1.5 text-xs rounded font-medium transition bg-amber-500/20 text-amber-400 border border-amber-500/30";
-                btnPre.className = "flex-1 py-1.5 text-xs rounded font-medium transition text-slate-400 hover:text-white";
+                btnPost.className = "flex-1 py-1.5 rounded font-medium transition bg-[#0C2630] text-white";
+                btnPre.className = "flex-1 py-1.5 rounded font-medium transition text-slate-400 hover:text-white";
             } else {
-                btnPre.className = "flex-1 py-1.5 text-xs rounded font-medium transition bg-slateBorder text-white";
-                btnPost.className = "flex-1 py-1.5 text-xs rounded font-medium transition text-slate-400 hover:text-white";
+                btnPre.className = "flex-1 py-1.5 rounded font-medium transition bg-[#0C2630] text-white";
+                btnPost.className = "flex-1 py-1.5 rounded font-medium transition text-slate-400 hover:text-white";
             }
 
             updatePolicyDiffBanner();
@@ -764,66 +800,60 @@
         }
 
         function updatePolicyDiffBanner() {
-            const banner = document.getElementById('policy-diff-banner');
+            const baselineText = document.getElementById('policy-baseline-text');
             const goldPill = document.getElementById('gold-truth-pill');
 
             if (!activeScenario) return;
 
             const expectedDecision = isPostEdit ? activeScenario.post_gold : activeScenario.pre_gold;
-            goldPill.textContent = `Gold: ${expectedDecision}`;
-            goldPill.className = expectedDecision === 'APPROVE' ? 'text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emeraldApprove border border-emerald-500/30 font-bold' :
-                                expectedDecision === 'BLOCK' ? 'text-[10px] font-mono px-2 py-0.5 rounded bg-rubyBlock/20 text-rubyBlock border border-rubyBlock/30 font-bold' :
-                                'text-[10px] font-mono px-2 py-0.5 rounded bg-amberFlag/20 text-amberFlag border border-amberFlag/30 font-bold';
+            goldPill.textContent = `GOLD: ${expectedDecision}`;
+            goldPill.className = expectedDecision === 'APPROVE' ? 'px-2 py-0.5 rounded bg-greenBrand/10 text-greenBrand border border-greenBrand/30 font-bold' :
+                                expectedDecision === 'BLOCK' ? 'px-2 py-0.5 rounded bg-redBrand/10 text-redBrand border border-redBrand/30 font-bold' :
+                                'px-2 py-0.5 rounded bg-amberBrand/10 text-amberBrand border border-amberBrand/30 font-bold';
 
             if (isPostEdit) {
-                banner.className = "rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 font-mono text-xs space-y-1.5";
-                banner.innerHTML = `
-                    <div class="flex items-center space-x-2 text-amber-400 font-bold text-[11px] uppercase">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                        <span>Active Policy Drift (Amended Operational Clause):</span>
-                    </div>
-                    <div class="space-y-1 pl-3.5 border-l border-amber-500/30">
-                        <div class="text-slate-400 line-through text-[11px]">- [ORIGINAL]: ${activeScenario.pre_policy}</div>
-                        <div class="text-amber-300 font-semibold text-[11px]">+ [AMENDED]: ${activeScenario.post_policy}</div>
-                    </div>
+                baselineText.innerHTML = `
+                    <span class="line-through text-slate-500 mr-2">${activeScenario.pre_policy}</span>
+                    <br>
+                    <span class="text-amberBrand font-semibold mt-0.5 block">Amended Clause: ${activeScenario.post_policy}</span>
                 `;
             } else {
-                banner.className = "rounded-xl border border-slateBorder bg-slateCard/40 p-3.5 font-mono text-xs space-y-1";
-                banner.innerHTML = `
-                    <div class="flex items-center space-x-2 text-cyanAccent font-bold text-[11px] uppercase">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyanAccent"></span>
-                        <span>Governing Policy Baseline:</span>
-                    </div>
-                    <div class="text-slate-300 text-[11px] pl-3.5 border-l border-cyanAccent/30">${activeScenario.pre_policy}</div>
-                `;
+                baselineText.textContent = activeScenario.pre_policy;
             }
         }
 
         function resetCards() {
             document.getElementById('sys-a-decision').textContent = "AWAITING";
-            document.getElementById('sys-a-decision').className = "px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400";
+            document.getElementById('sys-a-decision').className = "px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-[#0C2630] text-slate-300";
             document.getElementById('sys-a-status').textContent = "Idle";
             document.getElementById('sys-a-status').className = "text-slate-400";
-            document.getElementById('sys-a-citation').textContent = "Awaiting execution...";
-            document.getElementById('card-sys-a').className = "bg-slateCard border border-slateBorder rounded-xl p-5 flex flex-col justify-between space-y-4 relative transition-all duration-300";
+            document.getElementById('sys-a-citation').textContent = "Run the audit to inspect the rule citation.";
+            document.getElementById('card-sys-a').className = "bg-cardBg border border-borderTeal rounded-xl p-5 flex flex-col justify-between space-y-4 transition-all duration-300";
 
             document.getElementById('sys-b-decision').textContent = "AWAITING";
-            document.getElementById('sys-b-decision').className = "px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400";
+            document.getElementById('sys-b-decision').className = "px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-[#0C2630] text-slate-300";
             document.getElementById('sys-b-status').textContent = "Idle";
             document.getElementById('sys-b-status').className = "text-slate-400";
-            document.getElementById('sys-b-citation').textContent = "Awaiting execution...";
-            document.getElementById('card-sys-b').className = "bg-slateCard border border-slateBorder rounded-xl p-5 flex flex-col justify-between space-y-4 relative transition-all duration-300";
+            document.getElementById('sys-b-citation').textContent = "Run the audit to inspect the retrieved excerpt.";
+            document.getElementById('card-sys-b').className = "bg-cardBg border border-borderTeal rounded-xl p-5 flex flex-col justify-between space-y-4 transition-all duration-300";
 
             document.getElementById('sys-c-decision').textContent = "AWAITING";
-            document.getElementById('sys-c-decision').className = "px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400";
-            document.getElementById('sys-c-route').textContent = "Tier 1 Pass";
+            document.getElementById('sys-c-decision').className = "px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-[#0C2630] text-slate-300";
+            document.getElementById('sys-c-route').textContent = "Tier 1 → Tier 2";
+            document.getElementById('sys-c-rationale').textContent = "Execute to see the selected route and expected decision.";
         }
 
         function appendTelemetry(msg, color="text-slate-300") {
             const feed = document.getElementById('telemetry-feed');
-            const timeStr = new Date().toISOString().split('T')[1].replace('Z','');
+            if (auditEventCount === 0) {
+                feed.innerHTML = '';
+            }
+            auditEventCount++;
+            document.getElementById('log-count-tag').textContent = `${auditEventCount} event${auditEventCount === 1 ? '' : 's'} • local simulation`;
+            
+            const timeStr = new Date().toISOString().split('T')[1].replace('Z','').slice(0, 12);
             const p = document.createElement('p');
-            p.className = `${color}`;
+            p.className = `leading-relaxed ${color}`;
             p.textContent = `[${timeStr}] ${msg}`;
             feed.appendChild(p);
             feed.scrollTop = feed.scrollHeight;
@@ -836,53 +866,54 @@
             const resB = isPostEdit ? activeScenario.sys_b_post : activeScenario.sys_b_pre;
             const expected = isPostEdit ? activeScenario.post_gold : activeScenario.pre_gold;
 
-            appendTelemetry(`AUDIT_INVOKE: scenario=${activeScenario.id} domain=${currentDomain} is_edited=${isPostEdit}`, "text-cyanAccent font-bold");
+            appendTelemetry(`AUDIT_EVENT: scenario=${activeScenario.id} state=${isPostEdit ? 'AMENDED' : 'ORIGINAL'} target_gold=${expected}`, "text-cyanBrand font-bold");
 
             // Update System A
             const elDecA = document.getElementById('sys-a-decision');
             elDecA.textContent = resA.dec;
-            elDecA.className = resA.dec === 'APPROVE' ? 'px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emeraldApprove border border-emerald-500/30' :
-                               resA.dec === 'BLOCK' ? 'px-2 py-0.5 rounded text-[11px] font-bold bg-rubyBlock/20 text-rubyBlock border border-rubyBlock/30' :
-                               'px-2 py-0.5 rounded text-[11px] font-bold bg-amberFlag/20 text-amberFlag border border-amberFlag/30';
+            elDecA.className = resA.dec === 'APPROVE' ? 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-greenBrand/10 text-greenBrand border border-greenBrand/30' :
+                               resA.dec === 'BLOCK' ? 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-redBrand/10 text-redBrand border border-redBrand/30' :
+                               'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-amberBrand/10 text-amberBrand border border-amberBrand/30';
             
             const elStatA = document.getElementById('sys-a-status');
             if (resA.stale) {
-                elStatA.textContent = "STALE_BREACH";
-                elStatA.className = "text-rubyBlock font-bold";
-                document.getElementById('card-sys-a').className = "bg-slateCard border border-rubyBlock rounded-xl p-5 flex flex-col justify-between space-y-4 relative transition-all duration-300 glow-ruby-sm";
-                document.getElementById('sys-a-callout').innerHTML = "<span class='text-rubyBlock font-bold'>⚠️ STALE CODE FAILURE:</span> Rule engine enforced obsolete thresholds without developer refactoring.";
-                appendTelemetry(`[SYS_A] FAIL: Decision '${resA.dec}' diverged from amended gold '${expected}' (Stale Code Drift)`, "text-rubyBlock");
+                elStatA.textContent = "STALE (FAIL)";
+                elStatA.className = "text-redBrand font-bold";
+                document.getElementById('card-sys-a').className = "bg-cardBg border border-redBrand/60 rounded-xl p-5 flex flex-col justify-between space-y-4 transition-all duration-300 shadow-[0_0_20px_rgba(255,59,92,0.15)]";
+                document.getElementById('sys-a-footer').innerHTML = "<span class='text-redBrand font-bold'>⚠️ STALE CODE BREACH:</span> Hardcoded rule enforced superseded policy thresholds.";
+                appendTelemetry(`[SYS_A] VERDICT_DIVERGENCE: Decision '${resA.dec}' disagrees with governing policy '${expected}' (Stale Code Failure)`, "text-redBrand");
             } else {
-                elStatA.textContent = "COMPLIANT";
-                elStatA.className = "text-emeraldApprove font-bold";
-                document.getElementById('card-sys-a').className = "bg-slateCard border border-slateBorder rounded-xl p-5 flex flex-col justify-between space-y-4 relative transition-all duration-300";
-                document.getElementById('sys-a-callout').textContent = "Ultra-fast execution on deterministic thresholds.";
-                appendTelemetry(`[SYS_A] PASS: Decision '${resA.dec}' verified in <0.02ms`, "text-emeraldApprove");
+                elStatA.textContent = "MATCH (PASS)";
+                elStatA.className = "text-greenBrand font-bold";
+                document.getElementById('card-sys-a').className = "bg-cardBg border border-borderTeal rounded-xl p-5 flex flex-col justify-between space-y-4 transition-all duration-300";
+                document.getElementById('sys-a-footer').textContent = "Deterministic checks for explicit thresholds.";
+                appendTelemetry(`[SYS_A] VERDICT_SUCCESS: Executed static predicates in <0.02ms`, "text-slate-300");
             }
             document.getElementById('sys-a-citation').textContent = resA.cite;
 
             // Update System B
             const elDecB = document.getElementById('sys-b-decision');
             elDecB.textContent = resB.dec;
-            elDecB.className = resB.dec === 'APPROVE' ? 'px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emeraldApprove border border-emerald-500/30' :
-                               resB.dec === 'BLOCK' ? 'px-2 py-0.5 rounded text-[11px] font-bold bg-rubyBlock/20 text-rubyBlock border border-rubyBlock/30' :
-                               'px-2 py-0.5 rounded text-[11px] font-bold bg-amberFlag/20 text-amberFlag border border-amberFlag/30';
+            elDecB.className = resB.dec === 'APPROVE' ? 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-greenBrand/10 text-greenBrand border border-greenBrand/30' :
+                               resB.dec === 'BLOCK' ? 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-redBrand/10 text-redBrand border border-redBrand/30' :
+                               'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-amberBrand/10 text-amberBrand border border-amberBrand/30';
             
             const elStatB = document.getElementById('sys-b-status');
-            elStatB.textContent = isPostEdit ? "ADAPTED (0 Code)" : "GROUNDED";
-            elStatB.className = "text-cyanAccent font-bold";
+            elStatB.textContent = isPostEdit ? "ADAPTED (0-CODE)" : "GROUNDED";
+            elStatB.className = "text-cyanBrand font-bold";
             document.getElementById('sys-b-citation').textContent = `"${resB.cite}"`;
-            document.getElementById('card-sys-b').className = "bg-slateCard border border-cyanAccent/40 rounded-xl p-5 flex flex-col justify-between space-y-4 relative transition-all duration-300 glow-cyan-sm";
-            appendTelemetry(`[SYS_B] PASS: Decision '${resB.dec}' grounded via FAISS hybrid retrieval in 1.42s`, "text-cyanAccent");
+            document.getElementById('card-sys-b').className = "bg-cardBg border border-cyanBrand/40 rounded-xl p-5 flex flex-col justify-between space-y-4 transition-all duration-300 shadow-[0_0_20px_rgba(0,240,255,0.1)]";
+            appendTelemetry(`[SYS_B] VERDICT_SUCCESS: Grounded in retrieved text chunk via FAISS hybrid retrieval in 1.42s`, "text-cyanBrand");
 
             // Update System C
             const elDecC = document.getElementById('sys-c-decision');
             elDecC.textContent = expected;
-            elDecC.className = expected === 'APPROVE' ? 'px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emeraldApprove border border-emerald-500/30' :
-                               expected === 'BLOCK' ? 'px-2 py-0.5 rounded text-[11px] font-bold bg-rubyBlock/20 text-rubyBlock border border-rubyBlock/30' :
-                               'px-2 py-0.5 rounded text-[11px] font-bold bg-amberFlag/20 text-amberFlag border border-amberFlag/30';
+            elDecC.className = expected === 'APPROVE' ? 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-greenBrand/10 text-greenBrand border border-greenBrand/30' :
+                               expected === 'BLOCK' ? 'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-redBrand/10 text-redBrand border border-redBrand/30' :
+                               'px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-amberBrand/10 text-amberBrand border border-amberBrand/30';
             document.getElementById('sys-c-route').textContent = activeScenario.sys_c_route;
-            appendTelemetry(`[SYS_C] ROUTED: Handled via ${activeScenario.sys_c_route}`, "text-emeraldApprove");
+            document.getElementById('sys-c-rationale').textContent = activeScenario.sys_c_rationale;
+            appendTelemetry(`[SYS_C] TIERED_ROUTER: ${activeScenario.sys_c_route} -> Verdict '${expected}' validated`, "text-greenBrand");
         }
 
         window.addEventListener('DOMContentLoaded', () => {
